@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { APP_NAME, GITHUB_LINK } from '../../shared/constants';
 
 @Component({
   selector: 'app-header-section',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './header-section.component.css'
 })
 export class HeaderSectionComponent {
-
+  appName: string = APP_NAME;
+  githubLink: string = GITHUB_LINK;
 }

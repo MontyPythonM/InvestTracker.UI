@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  padding: 10px 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px 10px 20px;
+}
+
+
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.slogan {
+  font-size: 13px;
+  font-style: italic;
+  font-family: 'Pacifico', cursive;
+  color: #555;
+}
+
+.github-icon {
+  display: flex;
+  align-items: center;
+}
+
+.github-icon a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.github-icon img {
+  width: 32px;
+  height: 32px;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+}
