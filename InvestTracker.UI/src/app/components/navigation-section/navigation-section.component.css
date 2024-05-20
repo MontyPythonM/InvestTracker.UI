@@ -6,5 +6,18 @@
 .content-container {
   min-height: 100vh;
   box-sizing: border-box;
-  padding: 25px;
+  padding: 10px;
+}
+
+.nav-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.nav-link.active {
+  background-color: #dcdcdc;
 }

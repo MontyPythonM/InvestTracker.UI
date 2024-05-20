@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SectionModel } from '../../shared/models/section.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation-section',
@@ -8,15 +9,23 @@ import { SectionModel } from '../../shared/models/section.model';
 })
 export class NavigationSectionComponent {
   sections: SectionModel[];
-  isExpanded = false;
+  currentPath: string = "/";
 
-  constructor() {
+  constructor(private router: Router) {
     this.sections = [
       { name: "Home", path: "/" },
       { name: "Investment Strategies", path: "/strategies" },
       { name: "Offers", path: "/offers" },
       { name: "Calculators", path: "/calculators" },
       { name: "Account", path: "/account" }
-    ]
+    ];
+
+    this.router.events.subscribe(() => {
+      this.currentPath = this.router.url;
+    });
+  }
+
+  isActive(path: string): boolean {
+    return this.currentPath === path;
   }
 }

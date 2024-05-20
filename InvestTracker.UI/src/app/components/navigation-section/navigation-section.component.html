@@ -2,7 +2,13 @@
   <mat-sidenav-container autosize>
     <mat-sidenav-content>
       <div class="content-container">
-        <a *ngFor="let section of sections" mat-button href="{{section.path}}">{{ section.name }}</a>
+        <a *ngFor="let section of sections"
+           mat-button
+           class="nav-link"
+           [href]="section.path"
+           [ngClass]="{ 'active': isActive(section.path) }">
+          {{ section.name }}
+        </a>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
