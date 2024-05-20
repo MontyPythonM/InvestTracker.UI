@@ -1,20 +1,14 @@
-:host {
-  display: block;
-  padding: 10px 20px;
-}
-
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 20px 10px 20px;
+  margin: 20px 20px 20px 20px;
 }
-
 
 .title {
   font-size: 36px;
   font-weight: bold;
-  margin: 0;
+  margin: 3px;
 }
 
 .slogan {
@@ -22,6 +16,7 @@ header {
   font-style: italic;
   font-family: 'Pacifico', cursive;
   color: #555;
+  margin: 5px 0 0 65px;
 }
 
 .github-icon {

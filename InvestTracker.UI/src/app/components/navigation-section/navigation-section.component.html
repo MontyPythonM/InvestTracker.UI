@@ -1,5 +1,9 @@
 <nav>
-  <ul>
-    <li><a routerLink="/">Home</a></li>
-  </ul>
+  <mat-sidenav-container autosize>
+    <mat-sidenav-content>
+      <div class="content-container">
+        <a *ngFor="let section of sections" mat-button href="{{section.path}}">{{ section.name }}</a>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </nav>
