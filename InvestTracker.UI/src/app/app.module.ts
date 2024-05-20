@@ -6,13 +6,23 @@ import { NavigationSectionComponent } from './components/navigation-section/navi
 import { HeaderSectionComponent } from './components/header-section/header-section.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MaterialModule } from './shared/modules/material.module';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
+import { AccountComponent } from './pages/account/account.component';
+import { StrategiesComponent } from './pages/strategies/strategies.component';
+import { PortfoliosComponent } from './pages/portfolios/portfolios.component';
+import { CalculatorsComponent } from './pages/calculators/calculators.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationSectionComponent,
     HeaderSectionComponent,
-    HomeComponent
+    HomeComponent,
+    NotificationsComponent,
+    AccountComponent,
+    StrategiesComponent,
+    PortfoliosComponent,
+    CalculatorsComponent
   ],
   imports: [
     BrowserModule,

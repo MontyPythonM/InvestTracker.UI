@@ -15,8 +15,10 @@ export class NavigationSectionComponent {
     this.sections = [
       { name: "Home", path: "/" },
       { name: "Investment Strategies", path: "/strategies" },
+      { name: "Portfolios", path: "/portfolios" },
       { name: "Offers", path: "/offers" },
       { name: "Calculators", path: "/calculators" },
+      { name: "Notifications", path: "/notifications" },
       { name: "Account", path: "/account" }
     ];
 
