@@ -6,9 +6,8 @@
 }
 
 app-header-section {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #dee2e6;
   width: 100%;
+  background-image: linear-gradient(to right, #422174, #ffffff);
 }
 
 .content-wrapper {
@@ -18,10 +17,11 @@ app-header-section {
 
 app-navigation-section {
   background-color: #f1f3f5;
-  border-right: 1px solid #dee2e6;
+  border-right: 2px solid #dee2e6;
   max-height: 100vh;
 }
 
 .content {
   padding: 30px;
+  width: -webkit-fill-available;
 }
