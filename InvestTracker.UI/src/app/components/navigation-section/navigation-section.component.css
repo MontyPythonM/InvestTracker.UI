@@ -11,13 +11,21 @@
 
 .nav-link {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: flex-start;
   width: 100%;
   margin-bottom: 10px;
   text-decoration: none;
 }
 
+.nav-link mat-icon {
+  margin-right: 10px;
+}
+
 .nav-link.active {
   background-color: #dcdcdc;
+}
+
+::ng-deep .mat-sidenav {
+  bottom: initial;
 }

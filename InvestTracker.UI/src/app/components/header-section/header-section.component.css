@@ -2,7 +2,18 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 20px 20px 20px;
+  margin: 20px;
+}
+
+button {
+  margin-right: 20px;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: black;
 }
 
 .title {
@@ -32,11 +43,4 @@ header {
 .github-icon img {
   width: 32px;
   height: 32px;
-}
-
-.title-container {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: black;
 }

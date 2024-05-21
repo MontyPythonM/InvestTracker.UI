@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navigation-section',
   templateUrl: './navigation-section.component.html',
-  styleUrl: './navigation-section.component.css'
+  styleUrls: ['./navigation-section.component.css']
 })
 export class NavigationSectionComponent {
   sections: SectionModel[];
@@ -13,13 +13,13 @@ export class NavigationSectionComponent {
 
   constructor(private router: Router) {
     this.sections = [
-      { name: "Home", path: "/" },
-      { name: "Investment Strategies", path: "/strategies" },
-      { name: "Portfolios", path: "/portfolios" },
-      { name: "Offers", path: "/offers" },
-      { name: "Calculators", path: "/calculators" },
-      { name: "Notifications", path: "/notifications" },
-      { name: "Account", path: "/account" }
+      { name: "Home", path: "/", icon: "home" },
+      { name: "Investment Strategies", path: "/strategies", icon: "trending_up" },
+      { name: "Portfolios", path: "/portfolios", icon: "folder" },
+      { name: "Offers", path: "/offers", icon: "local_offer" },
+      { name: "Calculators", path: "/calculators", icon: "calculate" },
+      { name: "Notifications", path: "/notifications", icon: "notifications" },
+      { name: "Account", path: "/account", icon: "account_circle" }
     ];
 
     this.router.events.subscribe(() => {
@@ -27,7 +27,12 @@ export class NavigationSectionComponent {
     });
   }
 
-  isActive(path: string): boolean {
+  isSectionActive(path: string): boolean {
     return this.currentPath === path;
+  }
+
+  getIcon(name: string): string {
+    const section = this.sections.find(section => section.name === name);
+    return section ? section.icon : 'help_outline';
   }
 }

@@ -1,9 +1,11 @@
 <main class="main">
-  <app-header-section></app-header-section>
-  <div class="content-wrapper">
-    <app-navigation-section></app-navigation-section>
-    <div class="content">
+  <app-header-section (menuToggle)="sidenav.toggle()"></app-header-section>
+  <mat-sidenav-container class="content-wrapper">
+    <mat-sidenav #sidenav mode="side" [opened]="true">
+      <app-navigation-section></app-navigation-section>
+    </mat-sidenav>
+    <mat-sidenav-content class="content">
       <router-outlet></router-outlet>
-    </div>
-  </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </main>
