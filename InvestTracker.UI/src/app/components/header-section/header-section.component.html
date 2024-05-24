@@ -1,14 +1,29 @@
 <header>
-  <button mat-mini-fab color="secondary" (click)="menuToggle.emit()">
-    <mat-icon>menu</mat-icon>
-  </button>
+  <div class="left-side">
+    <button mat-mini-fab color="secondary" (click)="menuToggle.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a class="button" mat-raised-button color="secondary" [href]="githubLink" target="_blank">
+      <mat-icon>code</mat-icon>
+      <span>GitHub</span>
+    </a>
+  </div>
   <a class="title-container" href="/">
     <p class="title">{{ appName }}</p>
     <span class="slogan">Your financial asset monitor</span>
   </a>
-  <div class="github-icon">
-    <a href="{{ githubLink }}" target="_blank">
-      <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+  <div class="right-side">
+    <a class="button" mat-raised-button color="primary" [href]="">
+      <mat-icon>home</mat-icon>
+      <span>Register</span>
+    </a>
+    <a class="button" mat-raised-button color="primary" [href]="">
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </a>
+    <a class="button"mat-raised-button color="primary" [href]="">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Logout</span>
     </a>
   </div>
 </header>

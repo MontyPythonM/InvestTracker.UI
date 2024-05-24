@@ -19,7 +19,8 @@ export class NavigationSectionComponent {
       { name: "Offers", path: "/offers", icon: "local_offer" },
       { name: "Calculators", path: "/calculators", icon: "calculate" },
       { name: "Notifications", path: "/notifications", icon: "notifications" },
-      { name: "Account", path: "/account", icon: "account_circle" }
+      { name: "Account", path: "/account", icon: "account_circle" },
+      { name: "Users", path: "/users", icon: "group" }
     ];
 
     this.router.events.subscribe(() => {

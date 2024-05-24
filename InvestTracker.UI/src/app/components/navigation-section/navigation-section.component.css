@@ -19,11 +19,11 @@
 }
 
 .nav-link mat-icon {
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .nav-link.active {
-  background-color: #dcdcdc;
+  background-color: #d1d0d0;
 }
 
 ::ng-deep .mat-sidenav {

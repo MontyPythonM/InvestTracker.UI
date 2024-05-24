@@ -11,6 +11,10 @@ import { AccountComponent } from './pages/account/account.component';
 import { StrategiesComponent } from './pages/strategies/strategies.component';
 import { PortfoliosComponent } from './pages/portfolios/portfolios.component';
 import { CalculatorsComponent } from './pages/calculators/calculators.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { OffersModule } from './pages/offers/offers.module';
+import { UsersModule } from './pages/users/users.module';
 
 @NgModule({
   declarations: [
@@ -22,12 +26,16 @@ import { CalculatorsComponent } from './pages/calculators/calculators.component'
     AccountComponent,
     StrategiesComponent,
     PortfoliosComponent,
-    CalculatorsComponent
+    CalculatorsComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    OffersModule,
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]

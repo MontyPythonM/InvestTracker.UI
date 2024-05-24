@@ -26,7 +26,7 @@ button {
   font-size: 13px;
   font-style: italic;
   font-family: 'Pacifico', cursive;
-  color: #555;
+  color: #ffffff;
   margin: 5px 0 0 65px;
 }
 
@@ -43,4 +43,31 @@ button {
 .github-icon img {
   width: 32px;
   height: 32px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.right-side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 8px;
+}
+
+.left-side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
