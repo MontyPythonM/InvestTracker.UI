@@ -7,6 +7,8 @@ import { StrategiesComponent } from './pages/strategies/strategies.component';
 import { PortfoliosComponent } from './pages/portfolios/portfolios.component';
 import { CalculatorsComponent } from './pages/calculators/calculators.component';
 import { UsersComponent } from './pages/users/users.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,8 +19,9 @@ const routes: Routes = [
   { path: 'calculators', component: CalculatorsComponent },
   { path: 'notifications', component: NotificationsComponent },
   { path: 'account', component: AccountComponent },
-  { path: 'users', loadChildren: () => import('./pages/users/users.module').then((m) => m.UsersModule) }
-
+  { path: 'users', loadChildren: () => import('./pages/users/users.module').then((m) => m.UsersModule) },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

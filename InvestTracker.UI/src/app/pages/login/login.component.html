@@ -1,1 +1,21 @@
-<p>login works!</p>
+<div class="container">
+  <h1 class="title">Sign-in</h1>
+  <span class="description">Enter your credentials and check your investments!</span>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form">
+      <mat-form-field class="email-field">
+        <input matInput formControlName="email">
+        <mat-label>Email</mat-label>
+        <mat-error *ngIf="email?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="email?.hasError('email')">Email has invalid format</mat-error>
+      </mat-form-field>
+      <mat-form-field class="password-field">
+        <input matInput type="password" formControlName="password">
+        <mat-label>Password</mat-label>
+        <mat-error *ngIf="password?.hasError('required')">Password is required</mat-error>
+      </mat-form-field>
+      <button mat-button [disabled]="!loginForm.valid" mat-raised-button color="primary" class="submit-button">Login</button>
+    </div>
+  </form>
+</div>
+

@@ -13,17 +13,9 @@
     <span class="slogan">Your financial asset monitor</span>
   </a>
   <div class="right-side">
-    <a class="button" mat-raised-button color="primary" [href]="">
-      <mat-icon>home</mat-icon>
-      <span>Register</span>
-    </a>
-    <a class="button" mat-raised-button color="primary" [href]="">
-      <mat-icon>login</mat-icon>
-      <span>Login</span>
-    </a>
-    <a class="button"mat-raised-button color="primary" [href]="">
-      <mat-icon>exit_to_app</mat-icon>
-      <span>Logout</span>
+    <a *ngFor="let section of sections" class="button" mat-raised-button color="primary" [href]="section.path">
+      <mat-icon>{{ section.icon }}</mat-icon>
+      <span>{{ section.name }}</span>
     </a>
   </div>
 </header>

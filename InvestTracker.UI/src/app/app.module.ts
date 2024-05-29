@@ -15,6 +15,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { OffersModule } from './pages/offers/offers.module';
 import { UsersModule } from './pages/users/users.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,10 @@ import { UsersModule } from './pages/users/users.module';
     AppRoutingModule,
     MaterialModule,
     OffersModule,
-    UsersModule
+    UsersModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
