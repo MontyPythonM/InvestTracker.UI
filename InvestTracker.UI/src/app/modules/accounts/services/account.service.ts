@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoginForm } from '../models/LoginForm';
+import { LoginForm } from '../../../core/models/login-form.model';
 
 export const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

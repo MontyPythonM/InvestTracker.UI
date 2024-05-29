@@ -1,27 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersComponent } from './users.component';
+import { PortfoliosComponent } from './pages/portfolios/portfolios.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    UsersComponent
+    PortfoliosComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {
         path: '',
-        component: UsersComponent,
+        component: PortfoliosComponent,
         children: [
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'users'
+            redirectTo: 'portfolios'
           }
         ]
       }
     ])
   ]
 })
-export class UsersModule { }
+export class PortfoliosModule { }

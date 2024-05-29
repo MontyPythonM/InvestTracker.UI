@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OffersComponent } from './offers.component';
-import { OfferComponent } from './offer/offer.component';
+import { OffersComponent } from './pages/offers/offers.component';
+import { OfferComponent } from './pages/offer/offer.component';
 import { RouterModule } from "@angular/router";
 
 @NgModule({

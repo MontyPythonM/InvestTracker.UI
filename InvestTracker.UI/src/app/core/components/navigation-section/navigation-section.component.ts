@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SectionModel } from '../../shared/models/section.model';
+import { SectionModel } from '../../../core/models/section.model';
 import { Router } from '@angular/router';
 
 @Component({

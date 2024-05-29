@@ -17,10 +17,9 @@ import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatTabGroup ,
+    MatTabGroup,
     MatSlideToggleModule,
     MatIconModule,
     MatSidenavModule,
@@ -31,7 +30,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatListModule,
     MatNavList,
     MatSidenav,
-    BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule
@@ -39,7 +37,7 @@ import { MatSelectModule } from '@angular/material/select';
   exports: [
     MatButtonModule,
     MatCheckboxModule,
-    MatTabGroup ,
+    MatTabGroup,
     MatSlideToggleModule,
     MatIconModule,
     MatSidenavModule,
@@ -50,7 +48,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatListModule,
     MatNavList,
     MatSidenav,
-    BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule
