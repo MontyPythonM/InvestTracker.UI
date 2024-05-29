@@ -5,6 +5,7 @@ import { AccountComponent } from './pages/account/account.component';
 import { MaterialModule } from '../../shared/modules/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { RouterModule } from '@angular/router';
     AccountComponent
   ],
   imports: [
+    CommonModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
