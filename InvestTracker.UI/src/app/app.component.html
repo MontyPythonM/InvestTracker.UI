@@ -1,11 +1,13 @@
-<main class="main">
-  <app-header-section (menuToggle)="sidenav.toggle()"></app-header-section>
-  <mat-sidenav-container class="content-wrapper">
-    <mat-sidenav #sidenav mode="side" [opened]="true">
-      <app-navigation-section></app-navigation-section>
-    </mat-sidenav>
-    <mat-sidenav-content class="content">
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+<main [ngClass]="themeService.themeSignal()">
+  <div class="main" >
+    <app-header-section (menuToggle)="sidenav.toggle()"></app-header-section>
+    <mat-sidenav-container class="content-wrapper">
+      <mat-sidenav #sidenav mode="side" [opened]="true">
+        <app-navigation-section></app-navigation-section>
+      </mat-sidenav>
+      <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
 </main>

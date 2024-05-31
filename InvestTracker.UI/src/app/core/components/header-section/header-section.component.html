@@ -7,6 +7,16 @@
       <mat-icon>code</mat-icon>
       <span>GitHub</span>
     </a>
+    <div class="theme-control">
+      <mat-slide-toggle [checked]="isDarkTheme" (click)="toggleTheme()"></mat-slide-toggle>
+      <mat-icon class="theme-button">
+        @if (isDarkTheme){
+          <mat-icon>bedtime</mat-icon>
+        } @else {
+          <mat-icon>brightness_5</mat-icon>
+        }
+      </mat-icon>
+    </div>
   </div>
   <a class="title-container" href="/">
     <p class="title">{{ appName }}</p>
@@ -18,4 +28,4 @@
       <span>{{ section.name }}</span>
     </a>
   </div>
-</header>
+  </header>

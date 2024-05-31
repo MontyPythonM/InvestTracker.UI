@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navigation-section',
   templateUrl: './navigation-section.component.html',
-  styleUrls: ['./navigation-section.component.css']
+  styleUrls: ['./navigation-section.component.scss']
 })
 export class NavigationSectionComponent {
   sections: SectionModel[];
