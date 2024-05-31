@@ -14,19 +14,15 @@ export class ThemeService {
     if (savedTheme) {
       this.themeSignal.set(savedTheme as Theme);
     } else {
-      this.saveTheme(Theme.Dark);
+      localStorage.setItem(THEME_KEY, Theme.Dark);
     }
   }
 
   updateTheme() {
     this.themeSignal.update((value) => {
       const newTheme = value === Theme.Dark ? Theme.Light : Theme.Dark;
-      this.saveTheme(newTheme);
+      localStorage.setItem(THEME_KEY, newTheme);
       return newTheme;
     });
-  }
-
-  private saveTheme(theme: string) {
-    localStorage.setItem(THEME_KEY, theme);
   }
 }

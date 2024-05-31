@@ -2,7 +2,7 @@
   <div class="main" >
     <app-header-section (menuToggle)="sidenav.toggle()"></app-header-section>
     <mat-sidenav-container class="content-wrapper">
-      <mat-sidenav #sidenav mode="side" [opened]="true">
+      <mat-sidenav #sidenav mode="side" [opened]="isNavBarOpened">
         <app-navigation-section></app-navigation-section>
       </mat-sidenav>
       <mat-sidenav-content class="content">
