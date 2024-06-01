@@ -21,7 +21,8 @@ import { CommonModule } from '@angular/common';
     RouterModule.forChild([
       {
         path: '',
-        component: AccountComponent
+        pathMatch: 'full',
+        redirectTo: 'account'
       },
       {
         path: 'account',

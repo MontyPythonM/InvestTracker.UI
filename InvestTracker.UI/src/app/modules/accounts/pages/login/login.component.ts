@@ -25,10 +25,10 @@ export class LoginComponent {
 
     const loginFormModel = new LoginForm(this.email!.value, this.password.value);
     this.accountService.login(loginFormModel).subscribe((data) => {
-      console.log(data)
+      console.log(data);
     },
     error => {
-      console.log(error)
+      console.log(error);
     });
   }
 

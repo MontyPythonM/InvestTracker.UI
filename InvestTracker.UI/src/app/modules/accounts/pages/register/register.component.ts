@@ -28,10 +28,10 @@ export class RegisterComponent {
 
     const registerFormModel = new RegisterForm(this.email!.value, this.password.value, this.fullname?.value, this.phone.value);
     this.accountService.register(registerFormModel).subscribe((data) => {
-      console.log(data)
+      console.log(data);
     },
     error => {
-      console.log(error)
+      console.log(error);
     });
   }
 
