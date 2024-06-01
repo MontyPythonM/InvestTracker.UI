@@ -2,7 +2,7 @@
   <a *ngFor="let section of sections"
       mat-button
       class="nav-link"
-      [href]="section.path"
+      [routerLink]="section.path"
       [ngClass]="{ 'active': isSectionActive(section.path) }">
     <mat-icon>{{ getIcon(section.name) }}</mat-icon>
     <span>{{ section.name }}</span>
