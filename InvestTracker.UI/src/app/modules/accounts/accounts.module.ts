@@ -20,11 +20,11 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     RouterModule.forChild([
       {
-        path: 'account',
+        path: '',
         component: AccountComponent
       },
       {
-        path: '',
+        path: 'account',
         component: AccountComponent
       },
       {

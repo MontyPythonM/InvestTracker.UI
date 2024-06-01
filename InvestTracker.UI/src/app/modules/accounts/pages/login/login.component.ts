@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
+import { LoginForm } from '../../models/login-form.model';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent {
       return;
     }
 
-    this.accountService.login(this.email!.value, this.password.value).subscribe((data) => {
+    const loginFormModel = new LoginForm(this.email!.value, this.password.value);
+    this.accountService.login(loginFormModel).subscribe((data) => {
       console.log(data)
     },
     error => {

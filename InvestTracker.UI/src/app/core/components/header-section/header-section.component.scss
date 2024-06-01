@@ -60,10 +60,14 @@ button {
   justify-content: flex-start;
 }
 
-.button {
+.button-left {
   display: flex;
   justify-content: flex-start;
   margin-left: 8px;
+}
+
+.button-right {
+  margin-left: 15px;
 }
 
 .left-side {
@@ -79,6 +83,9 @@ button {
   margin-left: 25px;
 }
 
-.theme-button {
+.theme-icon {
   margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }

@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoginForm } from '../../../core/models/login-form.model';
+import { RegisterForm } from '../models/register-form.model';
+import { LoginForm } from '../models/login-form.model';
 
 export const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -16,14 +17,21 @@ export const httpOptions = {
 })
 export class AccountService {
 
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
-  login(email: string, password: string): Observable<HttpResponse<string>> {
+  login(loginForm: LoginForm) : Observable<HttpResponse<string>> {
     let requestOptions = Object.assign({}, httpOptions);
     Object.assign(requestOptions);
-    requestOptions.body = new LoginForm(email, password);
+    requestOptions.body = loginForm;
 
     return this.httpClient.request<HttpResponse<string>>("POST", "http://localhost:5200/users-module/accounts/sign-in", requestOptions);
+  }
+
+  register(registerForm: RegisterForm) : Observable<HttpResponse<string>>{
+    let requestOptions = Object.assign({}, httpOptions);
+    Object.assign(requestOptions);
+    requestOptions.body = registerForm;
+
+    return this.httpClient.request<HttpResponse<string>>("POST", "http://localhost:5200/users-module/accounts/sign-up", requestOptions);
   }
 }

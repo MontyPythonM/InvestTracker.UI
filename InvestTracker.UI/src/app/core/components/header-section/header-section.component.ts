@@ -1,6 +1,5 @@
 import { Component, Output, EventEmitter, inject } from '@angular/core';
 import { APP_NAME, GITHUB_LINK } from '../../constants';
-import { Router } from '@angular/router';
 import { SectionModel } from '../../models/section.model';
 import { ThemeService } from '../../services/theme.service';
 import { Theme } from '../../enums/theme.enum';
@@ -21,11 +20,10 @@ export class HeaderSectionComponent {
   navStateService: NavStateService = inject(NavStateService);
   isDarkTheme: boolean;
 
-  constructor(private router: Router) {
+  constructor() {
     this.sections = [
       { name: "Register", path: "/account/register", icon: "home" },
       { name: "Login", path: "/account/login", icon: "login" },
-      { name: "Logout", path: "/account/logout", icon: "exit_to_app" },
     ];
 
     this.isDarkTheme = this.themeService.themeSignal() === Theme.Dark;

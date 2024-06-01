@@ -1,1 +1,21 @@
-<p>register works!</p>
+<div class="container">
+  <h1 class="title">Sign-up</h1>
+  <span class="description">Register and start your investment journey!</span>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form">
+      <mat-form-field class="field">
+        <input matInput formControlName="email">
+        <mat-label>Email</mat-label>
+        <mat-error *ngIf="email?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="email?.hasError('email')">Email has invalid format</mat-error>
+      </mat-form-field>
+      <mat-form-field class="field">
+        <input matInput type="password" formControlName="password">
+        <mat-label>Password</mat-label>
+        <mat-error *ngIf="password?.hasError('required')">Password is required</mat-error>
+      </mat-form-field>
+      <button mat-button [disabled]="!registerForm.valid" mat-raised-button color="primary" class="submit-button">Register</button>
+    </div>
+  </form>
+</div>
+

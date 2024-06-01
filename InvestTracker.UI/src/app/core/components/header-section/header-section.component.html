@@ -9,13 +9,8 @@
     </a>
     <div class="theme-control">
       <mat-slide-toggle [checked]="isDarkTheme" (click)="toggleTheme()"></mat-slide-toggle>
-      <mat-icon class="theme-button">
-        @if (isDarkTheme){
-          <mat-icon>bedtime</mat-icon>
-        } @else {
-          <mat-icon>brightness_5</mat-icon>
-        }
-      </mat-icon>
+      <mat-icon *ngIf="isDarkTheme" class="theme-icon">bedtime</mat-icon>
+      <mat-icon *ngIf="!isDarkTheme" class="theme-icon">brightness_5</mat-icon>
     </div>
   </div>
   <a class="title-container" href="/">
@@ -23,9 +18,12 @@
     <span class="slogan">Your financial asset monitor</span>
   </a>
   <div class="right-side">
-    <a *ngFor="let section of sections" class="button" mat-raised-button color="primary" [href]="section.path">
+    <a *ngFor="let section of sections" class="button-right" mat-raised-button color="primary" [href]="section.path">
       <mat-icon>{{ section.icon }}</mat-icon>
       <span>{{ section.name }}</span>
+    </a>
+    <a class="button-right" mat-mini-fab color="primary" routerLink="/">
+      <mat-icon>exit_to_app</mat-icon>
     </a>
   </div>
   </header>
