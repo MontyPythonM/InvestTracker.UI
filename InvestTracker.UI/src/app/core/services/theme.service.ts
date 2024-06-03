@@ -18,7 +18,7 @@ export class ThemeService {
     }
   }
 
-  updateTheme() {
+  toggleTheme() {
     this.themeSignal.update((value) => {
       const newTheme = value === Theme.Dark ? Theme.Light : Theme.Dark;
       localStorage.setItem(THEME_KEY, newTheme);

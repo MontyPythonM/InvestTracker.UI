@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import { RegisterForm } from '../../models/register-form.model';
@@ -10,10 +10,12 @@ import { PHONE_REGEX } from '../../../../core/constants';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+  formBuilder = inject(FormBuilder);
+  accountService = inject(AccountService);
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private accountService: AccountService) {
-    this.registerForm = formBuilder.group({
+  constructor() {
+    this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       fullname: ['', [Validators.required]],
@@ -29,9 +31,6 @@ export class RegisterComponent {
     const registerFormModel = new RegisterForm(this.email!.value, this.password.value, this.fullname?.value, this.phone.value);
     this.accountService.register(registerFormModel).subscribe((data) => {
       console.log(data);
-    },
-    error => {
-      console.log(error);
     });
   }
 

@@ -3,7 +3,7 @@
     <button mat-mini-fab color="secondary" (click)="toggleNavigationBar()">
       <mat-icon>menu</mat-icon>
     </button>
-    <a class="button" mat-raised-button color="secondary" [routerLink]="githubLink" target="_blank">
+    <a class="button" mat-raised-button color="secondary" [href]="githubLink" target="_blank">
       <mat-icon>code</mat-icon>
       <span>GitHub</span>
     </a>
@@ -18,11 +18,13 @@
     <span class="slogan">Your financial asset monitor</span>
   </a>
   <div class="right-side">
-    <a *ngFor="let section of sections" class="button-right" mat-raised-button color="primary" [routerLink]="section.path">
-      <mat-icon>{{ section.icon }}</mat-icon>
-      <span>{{ section.name }}</span>
-    </a>
-    <a class="button-right" mat-mini-fab color="primary" routerLink="/">
+    <div *ngIf="!isLoggedIn">
+      <a *ngFor="let section of sections" class="button-right" mat-raised-button color="primary" [routerLink]="section.path">
+        <mat-icon>{{ section.icon }}</mat-icon>
+        <span>{{ section.name }}</span>
+      </a>
+    </div>
+    <a *ngIf="isLoggedIn" class="button-right" mat-mini-fab color="primary" routerLink="/" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
     </a>
   </div>

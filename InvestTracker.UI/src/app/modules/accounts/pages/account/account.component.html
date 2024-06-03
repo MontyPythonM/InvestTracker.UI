@@ -1,1 +1,25 @@
-<p>account works!</p>
+<div class="container" *ngIf="user">
+  <h1 class="title">Your account details</h1>
+  <p>Full Name:
+    <b>{{ user.fullName }}</b>
+  </p>
+  <p>Email:
+    <b>{{ user.email }}</b>
+  </p>
+  <p>Phone:
+     <b>{{ user.phone }}</b>
+    </p>
+  <p>Active:
+    <b>{{ user.isActive }}</b>
+  </p>
+  <p>Role:
+    <b>{{ user.role }}</b>
+  </p>
+  <p>Subscription:
+    <b>{{ user.subscription }}</b>
+  </p>
+  <p>Created at:
+    <b>{{ user.createdAt | date: dateTimeFormat }}</b>
+  </p>
+</div>
+<div *ngIf="!user">Loading data...</div>

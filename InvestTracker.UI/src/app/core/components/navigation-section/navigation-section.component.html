@@ -1,10 +1,13 @@
 <nav class="content-container">
-  <a *ngFor="let section of sections"
-      mat-button
-      class="nav-link"
-      [routerLink]="section.path"
-      [ngClass]="{ 'active': isSectionActive(section.path) }">
-    <mat-icon>{{ getIcon(section.name) }}</mat-icon>
-    <span>{{ section.name }}</span>
-  </a>
+  <div *ngFor="let section of sections">
+    <a *ngIf="IsVisibleFor(section.visibility)"
+        mat-button
+        class="nav-link"
+        [routerLink]="section.path"
+        [ngClass]="{ 'active': isSectionActive(section.path) }">
+        <div *ngIf=""></div>
+      <mat-icon>{{ getIcon(section.name) }}</mat-icon>
+      <span>{{ section.name }}</span>
+    </a>
+  </div>
 </nav>
