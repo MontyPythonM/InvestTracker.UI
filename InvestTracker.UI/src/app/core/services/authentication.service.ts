@@ -1,8 +1,8 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ACCESS_TOKEN_KEY } from '../constants';
 import { BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { AccessToken } from '../models/access-token.model';
+import { Jwt } from '../models/jwt.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class AuthenticationService {
     return localStorage.getItem(ACCESS_TOKEN_KEY);
   }
 
-  getDecodedToken() : AccessToken | null  {
+  getDecodedToken() : Jwt | null  {
     return this.hasValidToken() ? new JwtHelperService().decodeToken(this.getToken()!) : null;
   }
 

@@ -1,5 +1,4 @@
 import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { Theme } from '../enums/theme.enum';
 import { THEME_KEY } from '../constants';
 

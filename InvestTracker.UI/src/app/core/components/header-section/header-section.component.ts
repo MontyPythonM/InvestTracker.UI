@@ -4,7 +4,6 @@ import { SectionModel } from '../../models/section.model';
 import { ThemeService } from '../../services/theme.service';
 import { Theme } from '../../enums/theme.enum';
 import { NavStateService } from '../../services/nav-state.service';
-import { AuthenticationService } from '../../services/authentication.service';
 import { BaseComponent } from '../../../shared/abstractions/base.component';
 import { Visibility } from '../../../shared/enums/visibility.enum';
 import { NotifyService } from '../../../shared/services/notify.service';
