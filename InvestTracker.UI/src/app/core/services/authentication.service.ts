@@ -8,17 +8,12 @@ import { Jwt } from '../models/jwt.model';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private isLoggedSource = new BehaviorSubject<boolean>(false);
-  public isLogged$ = this.isLoggedSource.asObservable();
-
   hasValidToken() : boolean {
     const token = this.getToken();
-
     if (!token || new JwtHelperService().isTokenExpired(token)) {
       this.clearToken();
       return false;
     }
-
     return true;
   }
 
@@ -32,11 +27,9 @@ export class AuthenticationService {
 
   setToken(jwt: string) {
     localStorage.setItem(ACCESS_TOKEN_KEY, jwt);
-    this.isLoggedSource.next(true);
   }
 
   clearToken() {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
-    this.isLoggedSource.next(false);
   }
 }

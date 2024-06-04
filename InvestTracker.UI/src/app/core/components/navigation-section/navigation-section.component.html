@@ -1,6 +1,6 @@
 <nav class="content-container">
   <div *ngFor="let section of sections">
-    <a *ngIf="IsVisibleFor(section.visibility)"
+    <a *ngIf="isVisibleFor(section.visibility)"
         mat-button
         class="nav-link"
         [routerLink]="section.path"

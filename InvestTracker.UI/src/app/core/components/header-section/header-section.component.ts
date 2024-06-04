@@ -13,7 +13,7 @@ import { NotifyService } from '../../../shared/services/notify.service';
   templateUrl: './header-section.component.html',
   styleUrls: ['./header-section.component.scss']
 })
-export class HeaderSectionComponent extends BaseComponent implements OnInit {
+export class HeaderSectionComponent extends BaseComponent {
   themeService = inject(ThemeService);
   navStateService = inject(NavStateService);
   notifyService = inject(NotifyService);

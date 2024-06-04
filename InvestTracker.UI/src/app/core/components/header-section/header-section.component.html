@@ -18,13 +18,13 @@
     <span class="slogan">Your financial asset monitor</span>
   </a>
   <div class="right-side">
-    <div *ngIf="!isLoggedIn">
+    <div *ngIf="!isAuthenticated()">
       <a *ngFor="let section of sections" class="button-right" mat-raised-button color="primary" [routerLink]="section.path">
         <mat-icon>{{ section.icon }}</mat-icon>
         <span>{{ section.name }}</span>
       </a>
     </div>
-    <a *ngIf="isLoggedIn" class="button-right" mat-mini-fab color="primary" routerLink="/" (click)="logout()">
+    <a *ngIf="isAuthenticated()" class="button-right" mat-mini-fab color="primary" routerLink="/" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
     </a>
   </div>

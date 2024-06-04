@@ -20,7 +20,7 @@ export class AccessGuardService implements CanActivate  {
       return this.router.createUrlTree(['/account/login'])
     }
 
-    if (this.visibilityService.IsVisibleFor(visibility, jwt)) {
+    if (this.visibilityService.isVisibleFor(visibility, jwt)) {
       return true;
     }
 

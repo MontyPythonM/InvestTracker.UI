@@ -9,7 +9,7 @@ import { Jwt } from '../models/jwt.model';
 })
 export class VisibilityService {
 
-  IsVisibleFor(visibility: Visibility, jwt: Jwt | null): boolean {
+  isVisibleFor(visibility: Visibility, jwt: Jwt | null): boolean {
     const role = jwt?.system_role;
     const subscription = jwt?.system_subscription;
 
