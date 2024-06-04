@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import { RegisterForm } from '../../models/register-form.model';
 import { PHONE_REGEX } from '../../../../core/constants';
+import { NotifyService } from '../../../../shared/services/notify.service';
+import { ErrorResponse } from '../../../../shared/modules/error-response.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +15,8 @@ import { PHONE_REGEX } from '../../../../core/constants';
 export class RegisterComponent {
   formBuilder = inject(FormBuilder);
   accountService = inject(AccountService);
+  notifyService = inject(NotifyService);
+  router = inject(Router);
   registerForm: FormGroup;
 
   constructor() {
@@ -29,8 +34,15 @@ export class RegisterComponent {
     }
 
     const registerFormModel = new RegisterForm(this.email!.value, this.password.value, this.fullname?.value, this.phone.value);
-    this.accountService.register(registerFormModel).subscribe((data) => {
-      console.log(data);
+    this.accountService.register(registerFormModel).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/account/login');
+        this.notifyService.show("Successfully registered");
+      },
+      error: (error) => {
+        let errors = error.error as ErrorResponse;
+        this.notifyService.show(`${errors.errors[0].exceptionMessage}`);
+      }
     });
   }
 

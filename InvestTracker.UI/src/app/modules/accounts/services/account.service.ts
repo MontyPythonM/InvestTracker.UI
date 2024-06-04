@@ -25,9 +25,9 @@ export class AccountService {
     return this.httpClient.post<HttpResponse<AccessToken>>("http://localhost:5200/users-module/accounts/sign-in", loginForm, requestOptions);
   }
 
-  register(registerForm: RegisterForm) : Observable<HttpResponse<string>>{
+  register(registerForm: RegisterForm) : Observable<HttpResponse<void>>{
     let requestOptions = Object.assign({}, httpOptions);
-    return this.httpClient.post<HttpResponse<string>>("http://localhost:5200/users-module/accounts/sign-up", registerForm, requestOptions);
+    return this.httpClient.post<HttpResponse<void>>("http://localhost:5200/users-module/accounts/sign-up", registerForm, requestOptions);
   }
 
   getUser() : Observable<HttpResponse<User>> {

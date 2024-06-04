@@ -5,6 +5,8 @@ import { LoginForm } from '../../models/login-form.model';
 import { AuthenticationService } from '../../../../core/services/authentication.service';
 import { AccessToken } from '../../../../core/models/access-token.model';
 import { Router } from '@angular/router';
+import { NotifyService } from '../../../../shared/services/notify.service';
+import { ErrorResponse } from '../../../../shared/modules/error-response.model';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginComponent {
   accountService = inject(AccountService);
   authenticationService = inject(AuthenticationService);
   router = inject(Router);
+  notifyService = inject(NotifyService);
   loginForm: FormGroup;
 
   constructor() {
@@ -35,6 +38,20 @@ export class LoginComponent {
       let accessToken = data.body as AccessToken;
       this.authenticationService.setToken(accessToken.token);
       this.router.navigateByUrl('/');
+      this.notifyService.show("Successfully logged in", "Ok");
+    });
+
+    this.accountService.login(loginFormModel).subscribe({
+      next: (data) => {
+        let accessToken = data.body as AccessToken;
+        this.authenticationService.setToken(accessToken.token);
+        this.router.navigateByUrl('/');
+        this.notifyService.show("Successfully logged in");
+      },
+      error: (error) => {
+        let errors = error.error as ErrorResponse;
+        this.notifyService.show(`${errors.errors[0].exceptionMessage}`);
+      }
     });
   }
 
