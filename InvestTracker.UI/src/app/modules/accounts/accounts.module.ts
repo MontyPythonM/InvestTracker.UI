@@ -6,6 +6,8 @@ import { MaterialModule } from '../../shared/modules/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AccessGuardService } from '../../core/services/access-guard.service';
+import { Visibility } from '../../shared/enums/visibility.enum';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { CommonModule } from '@angular/common';
       },
       {
         path: 'account',
-        component: AccountComponent
+        component: AccountComponent,
+        canActivate: [AccessGuardService], 
+        data: { visibility: Visibility.LoggedInUsers }
       },
       {
         path: 'register',

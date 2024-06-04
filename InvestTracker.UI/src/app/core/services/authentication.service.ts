@@ -14,7 +14,7 @@ export class AuthenticationService {
   hasValidToken() : boolean {
     const token = this.getToken();
 
-    if (!!token && new JwtHelperService().isTokenExpired(token)) {
+    if (!token || new JwtHelperService().isTokenExpired(token)) {
       this.clearToken();
       return false;
     }
