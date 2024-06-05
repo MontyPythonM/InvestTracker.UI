@@ -1,28 +1,20 @@
 <div class="container" *ngIf="user">
-  <h1 class="title">Your account details</h1>
-  <p>ID:
-    <b>{{ user.id }}</b>
-  </p>
-  <p>Full Name:
-    <b>{{ user.fullName }}</b>
-  </p>
-  <p>Email:
-    <b>{{ user.email }}</b>
-  </p>
-  <p>Phone:
-     <b>{{ user.phone }}</b>
-    </p>
-  <p>Active:
-    <b>{{ user.isActive }}</b>
-  </p>
-  <p>Role:
-    <b>{{ user.role }}</b>
-  </p>
-  <p>Subscription:
-    <b>{{ user.subscription }}</b>
-  </p>
-  <p>Created at:
-    <b>{{ user.createdAt | date: dateTimeFormat }}</b>
-  </p>
+  <div class="section">
+    <h1 class="title">Account details</h1>
+    <p>ID: {{ user.id }}</p>
+    <p>Full Name: {{ user.fullName }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Phone: {{ user.phone }}</p>
+    <p>Active: {{ user.isActive }}</p>
+    <p>Role: {{ user.role }}</p>
+    <p>Subscription: {{ user.subscription }}</p>
+    <p>Created at: {{ user.createdAt | date: dateTimeFormat }}</p>
+  </div>
+  <div class="section">
+    <h1 class="title">Delete account</h1>
+    <p>Once you delete your account, there is no going back. Please be certain.</p>
+    <button mat-raised-button color="primary" class="delete-button" (click)="openDeleteAccountDialog()">Delete account</button>
+  </div>
 </div>
-<div *ngIf="!user">Loading data...</div>
+
+<app-spinner [isVisible]="!user"></app-spinner>

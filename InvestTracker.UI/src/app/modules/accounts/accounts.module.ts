@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AccessGuardService } from '../../core/services/access-guard.service';
 import { Visibility } from '../../shared/enums/visibility.enum';
+import { SpinnerComponent } from '../../shared/components/spinner/spinner.component';
+import { SpinnerModule } from '../../shared/components/spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { Visibility } from '../../shared/enums/visibility.enum';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    SpinnerModule,
     RouterModule.forChild([
       {
         path: '',
@@ -29,7 +32,7 @@ import { Visibility } from '../../shared/enums/visibility.enum';
       {
         path: 'account',
         component: AccountComponent,
-        canActivate: [AccessGuardService], 
+        canActivate: [AccessGuardService],
         data: { visibility: Visibility.LoggedInUsers }
       },
       {

@@ -6,4 +6,18 @@
 
 .title {
   font-weight: 500;
+  border-bottom: 1px solid rgb(100, 100, 100);
+}
+
+.delete-button {
+  background-color: darkred;
+  margin-top: 10px;
+}
+
+.delete-title {
+  color: darkred;
+}
+
+.section {
+  margin-bottom: 30px;
 }

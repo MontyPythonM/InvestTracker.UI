@@ -7,21 +7,21 @@ import { AccessToken } from '../../../../core/models/access-token.model';
 import { Router } from '@angular/router';
 import { NotifyService } from '../../../../shared/services/notify.service';
 import { ErrorResponse } from '../../../../shared/modules/error-response.model';
+import { BaseComponent } from '../../../../shared/abstractions/base.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent extends BaseComponent {
   formBuilder = inject(FormBuilder);
   accountService = inject(AccountService);
-  authenticationService = inject(AuthenticationService);
   router = inject(Router);
-  notifyService = inject(NotifyService);
   loginForm: FormGroup;
 
   constructor() {
+    super();
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -34,14 +34,8 @@ export class LoginComponent {
     }
 
     const loginFormModel = new LoginForm(this.email!.value, this.password.value);
-    this.accountService.login(loginFormModel).subscribe((data) => {
-      let accessToken = data.body as AccessToken;
-      this.authenticationService.setToken(accessToken.token);
-      this.router.navigateByUrl('/');
-      this.notifyService.show("Successfully logged in", "Ok");
-    });
 
-    this.accountService.login(loginFormModel).subscribe({
+    this.accountService.login(loginFormModel).safeSubscribe(this, {
       next: (data) => {
         let accessToken = data.body as AccessToken;
         this.authenticationService.setToken(accessToken.token);

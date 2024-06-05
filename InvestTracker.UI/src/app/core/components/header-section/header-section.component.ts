@@ -16,7 +16,6 @@ import { NotifyService } from '../../../shared/services/notify.service';
 export class HeaderSectionComponent extends BaseComponent {
   themeService = inject(ThemeService);
   navStateService = inject(NavStateService);
-  notifyService = inject(NotifyService);
 
   @Output() menuToggle = new EventEmitter<void>();
   appName: string = APP_NAME;
