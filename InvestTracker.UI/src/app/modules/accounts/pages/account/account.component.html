@@ -12,9 +12,15 @@
   </div>
   <div class="section">
     <h1 class="title">Delete account</h1>
-    <p>Once you delete your account, there is no going back. Please be certain.</p>
-    <button mat-raised-button color="primary" class="delete-button" (click)="openDeleteAccountDialog()">Delete account</button>
+    <div class="delete-description">Once you delete your account, there is no going back. Please be certain.</div>
+    <form class="form" [formGroup]="deleteAccountForm" (ngSubmit)="deleteAccount()" novalidate>
+      <mat-form-field class="password-field">
+        <input matInput type="password" formControlName="password">
+        <mat-label>Password</mat-label>
+        <mat-error *ngIf="password?.hasError('required')">Password is required</mat-error>
+      </mat-form-field>
+      <button mat-button [disabled]="!deleteAccountForm.valid" mat-raised-button color="primary" class="delete-button">Delete account</button>
+    </form>
   </div>
 </div>
-
 <app-spinner [isVisible]="!user"></app-spinner>

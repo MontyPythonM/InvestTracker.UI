@@ -2,11 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { User } from '../../../../core/models/user.model';
 import { AccountService } from '../../services/account.service';
 import { DATETIME_FORMAT } from '../../../../core/constants';
-import { NotifyService } from '../../../../shared/services/notify.service';
 import { ErrorResponse } from '../../../../shared/modules/error-response.model';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../../../core/services/authentication.service';
 import { BaseComponent } from '../../../../shared/abstractions/base.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-account',
@@ -16,8 +15,17 @@ import { BaseComponent } from '../../../../shared/abstractions/base.component';
 export class AccountComponent extends BaseComponent implements OnInit {
   user?: User;
   dateTimeFormat = DATETIME_FORMAT;
+  deleteAccountForm: FormGroup;
   accountService = inject(AccountService);
   router = inject(Router);
+  formBuilder = inject(FormBuilder);
+
+  constructor() {
+    super();
+    this.deleteAccountForm = this.formBuilder.group({
+      password: ['', [Validators.required]]
+    });
+  }
 
   ngOnInit(): void {
     this.accountService.getUser().safeSubscribe(this, {
@@ -27,13 +35,12 @@ export class AccountComponent extends BaseComponent implements OnInit {
     });
   }
 
-  openDeleteAccountDialog() {
-    // TODO add dialog with string input field for password and cancel/confirm buttons
-    this.deleteAccount("");
-  }
+  deleteAccount() {
+    if (this.deleteAccountForm.invalid) {
+      return;
+    }
 
-  private deleteAccount(password: string) {
-    this.accountService.deleteAccount(password).safeSubscribe(this, {
+    this.accountService.deleteAccount(this.password.value).safeSubscribe(this, {
       next: () => {
         this.notifyService.show("Account has been permanently deleted");
         this.authenticationService.clearToken();
@@ -45,5 +52,9 @@ export class AccountComponent extends BaseComponent implements OnInit {
         this.notifyService.show(`${errors.errors[0].exceptionMessage}`);
       }
     });
+  }
+
+  protected get password() {
+    return this.deleteAccountForm.get('password')!;
   }
 }
