@@ -5,14 +5,7 @@ import { RegisterForm } from '../models/register-form.model';
 import { LoginForm } from '../models/login-form.model';
 import { User } from '../../../core/models/user.model';
 import { AccessToken } from '../../../core/models/access-token.model';
-
-export const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  body: {},
-  observe: 'response' as 'body',
-  params: {},
-  withCredentials: true
-};
+import { httpOptions } from '../../../core/constants';
 
 @Injectable({
   providedIn: 'root'

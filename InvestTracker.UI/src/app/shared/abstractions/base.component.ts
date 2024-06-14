@@ -23,28 +23,10 @@ export abstract class BaseComponent implements OnDestroy {
     return this.visibilityService.isVisibleFor(visibility, accessToken);
   }
 
-  protected safeSubscribe<T>(observable: Observable<T>, next?: (value: T) => void, error?: (error: any) => void, complete?: () => void): Subscription {
-    return observable.pipe(catchError(err => {
-      this.handleError(err);
-      return throwError(() => err);
-    }), takeUntil(this.destroy$))
-    .subscribe(next, error, complete);
-  }
-
   protected isAuthenticated = () => this.authenticationService.hasValidToken();
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  private handleError(error: any): void {
-    switch (error.status) {
-      case 403:
-        this.notifyService.show('Action forbidden');
-        break;
-      default:
-        this.notifyService.show('Error occurred');
-    }
   }
 }
