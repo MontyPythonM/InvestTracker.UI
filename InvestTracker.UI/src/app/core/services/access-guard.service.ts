@@ -16,10 +16,6 @@ export class AccessGuardService implements CanActivate  {
     const visibility = route.data['visibility'] as Visibility ?? Visibility.Everyone;
     const jwt = this.authenticationService.getDecodedToken();
 
-    if (!this.authenticationService.hasValidToken()) {
-      return this.router.createUrlTree(['/account/login'])
-    }
-
     if (this.visibilityService.isVisibleFor(visibility, jwt)) {
       return true;
     }

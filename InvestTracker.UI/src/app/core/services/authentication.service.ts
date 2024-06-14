@@ -3,46 +3,49 @@ import { ACCESS_TOKEN_KEY, HTTP_OPTIONS } from '../constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Jwt } from '../models/jwt.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { AccessToken } from '../models/access-token.model';
 import { apiUrl } from '../../shared/environments/api-urls';
+import { NotifyService } from '../../shared/services/notify.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   httpClient = inject(HttpClient);
-
-  hasValidToken() : boolean {
-    const token = this.getToken();
-    if (!token || new JwtHelperService().isTokenExpired(token)) {
-      // clear current jwt
-      this.clearToken();
-
-      // call backend refreshToken() for new AccessToken object
-
-      // if response is success store new jwt and return true
-      //this.setToken(response.body.token);
-
-      // otherwise return false
-      return false;
-    }
-    return true;
-  }
+  notifyService = inject(NotifyService);
 
   getToken() : string | null {
     return localStorage.getItem(ACCESS_TOKEN_KEY);
   }
 
   getDecodedToken() : Jwt | null  {
-    return this.hasValidToken() ? new JwtHelperService().decodeToken(this.getToken()!) : null;
+    // return this.hasValidToken() ? new JwtHelperService().decodeToken(this.getToken()!) : null;
+    return new JwtHelperService().decodeToken(this.getToken()!);
   }
 
-  setToken(jwt: string) {
+  hasValidToken() : boolean {
+    const token = this.getToken();
+    if (!token || new JwtHelperService().isTokenExpired(token)) {
+      //this.clearToken();
+      return false;
+    }
+    return true;
+  }
+
+  isTokenExpired() : boolean {
+    return new JwtHelperService().isTokenExpired(this.getToken());
+  }
+
+  isTokenExists() : boolean {
+    return !!this.getToken();
+  }
+
+  setToken(jwt: string) : void {
     localStorage.setItem(ACCESS_TOKEN_KEY, jwt);
   }
 
-  clearToken() {
+  clearToken() : void {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
   }
 
@@ -53,6 +56,6 @@ export class AuthenticationService {
 
   refreshToken() : Observable<HttpResponse<AccessToken>> {
     let requestOptions = Object.assign({}, HTTP_OPTIONS);
-    return this.httpClient.post<HttpResponse<AccessToken>>(`${apiUrl.module.users}/accounts/refresh-token`, {}, requestOptions)
+    return this.httpClient.post<HttpResponse<AccessToken>>(`${apiUrl.module.users}/accounts/refresh-token`, {}, requestOptions);
   }
 }
