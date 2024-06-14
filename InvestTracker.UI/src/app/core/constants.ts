@@ -9,7 +9,7 @@ export const PHONE_REGEX = /^\+?(\d{1,3})?[-. ]?(\(?\d{1,4}\)?[-. ]?)?(\d{1,4}[-
 export const DATETIME_FORMAT = 'dd/MM/yyyy HH:MM:ss';
 export const DATE_FORMAT = 'dd/MM/yyyy';
 
-export const httpOptions = {
+export const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   body: {},
   observe: 'response' as 'body',

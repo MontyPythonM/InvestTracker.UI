@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { ACCESS_TOKEN_KEY, httpOptions } from '../constants';
+import { ACCESS_TOKEN_KEY, HTTP_OPTIONS } from '../constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Jwt } from '../models/jwt.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable, catchError, firstValueFrom, map, of, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AccessToken } from '../models/access-token.model';
+import { apiUrl } from '../../shared/environments/api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -46,12 +47,12 @@ export class AuthenticationService {
   }
 
   revokeToken() : Observable<HttpResponse<void>> {
-    let requestOptions = Object.assign({}, httpOptions);
-    return this.httpClient.post<HttpResponse<void>>("http://localhost:5200/users-module/accounts/revoke-token", {}, requestOptions);
+    let requestOptions = Object.assign({}, HTTP_OPTIONS);
+    return this.httpClient.post<HttpResponse<void>>(`${apiUrl.module.users}/accounts/revoke-token`, {}, requestOptions);
   }
 
   refreshToken() : Observable<HttpResponse<AccessToken>> {
-    let requestOptions = Object.assign({}, httpOptions);
-    return this.httpClient.post<HttpResponse<AccessToken>>("http://localhost:5200/users-module/accounts/refresh-token", {}, requestOptions)
+    let requestOptions = Object.assign({}, HTTP_OPTIONS);
+    return this.httpClient.post<HttpResponse<AccessToken>>(`${apiUrl.module.users}/accounts/refresh-token`, {}, requestOptions)
   }
 }

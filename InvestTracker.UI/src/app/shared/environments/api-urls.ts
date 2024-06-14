@@ -1,9 +1,11 @@
+import { environment } from "./environment";
+
 export const apiUrl = {
   module: {
-    users: 'users-module/',
-    offers: 'offers-module/',
-    calculators: 'calculators-module/',
-    strategies: 'investment-strategies-module/',
-    notifications: 'notifications-module/'
+    users: `${environment.serverUrl}/users-module`,
+    offers: `${environment.serverUrl}/offers-module`,
+    calculators: `${environment.serverUrl}/calculators-module`,
+    strategies: `${environment.serverUrl}/investment-strategies-module`,
+    notifications: `${environment.serverUrl}/notifications-module`
   }
 }
