@@ -7,6 +7,7 @@ import { User } from '../../../core/models/user.model';
 import { AccessToken } from '../../../core/models/access-token.model';
 import { HTTP_OPTIONS } from '../../../core/constants';
 import { apiUrl } from '../../../shared/environments/api-urls';
+import { ResetPasswordForm } from '../models/reset-password-form.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,15 @@ export class AccountService {
     let requestOptions = Object.assign({}, HTTP_OPTIONS);
     requestOptions.body = { password: password };
     return this.httpClient.delete<ArrayBuffer>(`${apiUrl.module.users}/accounts/`, requestOptions);
+  }
+
+  forgotPassword(email: string) : Observable<HttpResponse<void>> {
+    let requestOptions = Object.assign({}, HTTP_OPTIONS);
+    return this.httpClient.post<HttpResponse<void>>(`${apiUrl.module.users}/accounts/forgot-password?email=${email}`, {}, requestOptions);
+  }
+
+  resetPassword(reserPasswordForm: ResetPasswordForm) : Observable<HttpResponse<void>> {
+    let requestOptions = Object.assign({}, HTTP_OPTIONS);
+    return this.httpClient.post<HttpResponse<void>>(`${apiUrl.module.users}/accounts/reset-forgotten-password`, reserPasswordForm, requestOptions);
   }
 }

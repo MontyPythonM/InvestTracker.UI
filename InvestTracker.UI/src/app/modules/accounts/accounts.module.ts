@@ -8,14 +8,17 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AccessGuardService } from '../../core/services/access-guard.service';
 import { Visibility } from '../../shared/enums/visibility.enum';
-import { SpinnerComponent } from '../../shared/components/spinner/spinner.component';
 import { SpinnerModule } from '../../shared/components/spinner/spinner.module';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    AccountComponent
+    AccountComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +45,14 @@ import { SpinnerModule } from '../../shared/components/spinner/spinner.module';
       {
         path: 'login',
         component: LoginComponent,
+      },
+      {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent
+      },
+      {
+        path: 'reset-password/:key',
+        component: ResetPasswordComponent
       }
     ])
   ]

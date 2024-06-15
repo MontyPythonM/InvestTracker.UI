@@ -14,6 +14,7 @@
         <mat-label>Password</mat-label>
         <mat-error *ngIf="password?.hasError('required')">Password is required</mat-error>
       </mat-form-field>
+      <a  class="forgot-password" routerLink="/account/forgot-password">Forgot Password?</a>
       <button mat-button [disabled]="!loginForm.valid" mat-raised-button color="primary" class="submit-button">Login</button>
     </div>
   </form>
