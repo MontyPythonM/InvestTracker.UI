@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, inject, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, inject } from '@angular/core';
 import { APP_NAME, GITHUB_LINK } from '../../constants';
 import { SectionModel } from '../../models/section.model';
 import { ThemeService } from '../../services/theme.service';
@@ -6,7 +6,6 @@ import { Theme } from '../../enums/theme.enum';
 import { NavStateService } from '../../services/nav-state.service';
 import { BaseComponent } from '../../../shared/abstractions/base.component';
 import { Visibility } from '../../../shared/enums/visibility.enum';
-import { NotifyService } from '../../../shared/services/notify.service';
 
 @Component({
   selector: 'app-header-section',
@@ -43,6 +42,11 @@ export class HeaderSectionComponent extends BaseComponent {
   }
 
   logout() {
+    this.authenticationService.revokeToken().safeSubscribe(this, {
+      error: () => {
+        console.log("Cannot revoke refresh token");
+      }
+    });
     this.authenticationService.clearToken();
     this.notifyService.show("Successfully logged out");
   }

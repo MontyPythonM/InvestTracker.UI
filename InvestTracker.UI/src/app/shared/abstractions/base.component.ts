@@ -14,7 +14,7 @@ export abstract class BaseComponent implements OnDestroy {
   protected visibilityService = inject(VisibilityService);
   protected notifyService  = inject(NotifyService);
 
-  constructor() {
+  protected constructor() {
     this.destroy$ = new Subject<void>();
   }
 

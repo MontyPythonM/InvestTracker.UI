@@ -29,11 +29,6 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     RouterModule.forChild([
       {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'account'
-      },
-      {
-        path: 'account',
         component: AccountComponent,
         canActivate: [AccessGuardService],
         data: { visibility: Visibility.LoggedInUsers }

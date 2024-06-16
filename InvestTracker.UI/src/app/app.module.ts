@@ -20,6 +20,7 @@ import { HomeModule } from './modules/home/home.module';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
     HttpClientModule
   ],
   providers: [
+    DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

@@ -8,9 +8,6 @@ import { BaseComponent } from '../abstractions/base.component';
 
 declare module 'rxjs' {
   interface Observable<T> {
-    safeSubscribe(
-      baseComponent: BaseComponent,
-      observer: Partial<Observer<T>>
-    ): Subscription;
+    safeSubscribe(baseComponent: BaseComponent,observer: Partial<Observer<T>>): Subscription;
   }
 }

@@ -2,26 +2,36 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './pages/users/users.component';
 import { RouterModule } from '@angular/router';
+import { UserDetailsComponent } from './pages/user-details/user-details.component';
+import { AccessGuardService } from '../../core/services/access-guard.service';
+import { Visibility } from '../../shared/enums/visibility.enum';
+import { SpinnerModule } from "../../shared/components/spinner/spinner.module";
+import { MaterialModule } from '../../shared/modules/material.module';
 
 @NgModule({
-  declarations: [
-    UsersComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: UsersComponent,
-        children: [
-          {
-            path: '',
-            pathMatch: 'full',
-            redirectTo: 'users'
-          }
-        ]
-      }
-    ])
-  ]
+    declarations: [
+        UsersComponent,
+        UserDetailsComponent
+    ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        SpinnerModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                component: UsersComponent,
+                canActivate: [AccessGuardService],
+                data: { visibility: Visibility.Administrators }
+            },
+            {
+                path: 'users/:id',
+                component: UserDetailsComponent,
+                canActivate: [AccessGuardService],
+                data: { visibility: Visibility.Administrators }
+            }
+        ]),
+        SpinnerModule
+    ]
 })
 export class UsersModule { }

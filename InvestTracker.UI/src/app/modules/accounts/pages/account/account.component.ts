@@ -28,7 +28,7 @@ export class AccountComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountService.getUser().safeSubscribe(this, {
+    this.accountService.getCurrentUser().safeSubscribe(this, {
       next: (response) => {
         this.user = response.body as User;
       }

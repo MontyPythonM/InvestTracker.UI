@@ -25,7 +25,7 @@ export class AccountService {
     return this.httpClient.post<HttpResponse<void>>(`${apiUrl.module.users}/accounts/sign-up`, registerForm, requestOptions);
   }
 
-  getUser() : Observable<HttpResponse<User>> {
+  getCurrentUser() : Observable<HttpResponse<User>> {
     let requestOptions = Object.assign({}, HTTP_OPTIONS);
     return this.httpClient.get<HttpResponse<User>>(`${apiUrl.module.users}/users`, requestOptions);
   }
