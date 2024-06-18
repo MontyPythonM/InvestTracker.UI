@@ -1,1 +1,29 @@
-<p>user-details works!</p>
+<div class="container" *ngIf="user">
+  <a class="back-button" mat-mini-fab color="primary" routerLink="/users">
+    <mat-icon>arrow_back</mat-icon>
+  </a>
+  <div class="section">
+    <h1 class="title">Account details</h1>
+    <p>ID: {{ user.id }}</p>
+    <p>Full Name: {{ user.fullName }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Phone: {{ user.phone }}</p>
+    <p>Active: {{ user.isActive }}</p>
+    <p>Created at: {{ user.createdAt | date: dateTimeFormat }}</p>
+  </div>
+  <div class="section">
+    <h1 class="title">Role</h1>
+    <p>Role: {{ user.role.value }}</p>
+    <p>Granted by: {{ user.role.grantedBy }}</p>
+    <p>Granted at: {{ user.role.grantedAt | date: dateTimeFormat }}</p>
+  </div>
+    <div class="section">
+    <h1 class="title">Subscription</h1>
+    <p>Subscription: {{ user.subscription.value }}</p>
+    <p>Expired at: {{ user.subscription.expiredAt }}</p>
+    <p>Change source: {{ user.subscription.changeSource }}</p>
+    <p>Granted by: {{ user.subscription.grantedBy }}</p>
+    <p>Granted at: {{ user.subscription.grantedAt | date: dateTimeFormat }}</p>
+  </div>
+</div>
+<app-spinner [isVisible]="!user"></app-spinner>

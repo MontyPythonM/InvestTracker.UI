@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+}
+
+.title {
+  font-weight: 500;
+  border-bottom: 1px solid rgb(100, 100, 100);
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.back-button {
+  margin-bottom: 25px;
+}

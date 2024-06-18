@@ -1,5 +1,5 @@
-import { Subscription } from "rxjs";
 import { Role } from "./role.model";
+import { Subscription } from "./subscription.model";
 
 export class UserDetails {
   id: string;

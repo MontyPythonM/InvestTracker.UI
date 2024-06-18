@@ -4,6 +4,9 @@ import { User } from '../../../../core/models/user.model';
 import { UsersService } from '../../services/users.service';
 import { ErrorResponse } from '../../../../shared/modules/error-response.model';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { TableColumn } from '../../../../shared/models/table-column.interface';
+import { DATETIME_FORMAT } from '../../../../core/constants';
 
 @Component({
   selector: 'app-users',
@@ -12,12 +15,26 @@ import { DatePipe } from '@angular/common';
 })
 export class UsersComponent extends BaseComponent implements OnInit {
   users?: User[];
+  columns: TableColumn<User>[];
+  displayedColumns: string[];
   usersService = inject(UsersService);
   datePipe = inject(DatePipe);
+  router = inject(Router);
 
   constructor() {
     super();
     this.users = [];
+    this.columns = [
+      { columnDef: 'id', header: 'Id', format: (element: User) => `${element.id}` },
+      { columnDef: 'fullName', header: 'Full name', format: (element: User) => `${element.fullName}` },
+      { columnDef: 'email', header: 'Email', format: (element: User) => `${element.email}` },
+      { columnDef: 'phone', header: 'Phone', format: (element: User) => `${element.phone}` },
+      { columnDef: 'role', header: 'Role', format: (element: User) => `${element.role}` },
+      { columnDef: 'subscription', header: 'Subscription', format: (element: User) => `${element.subscription}` },
+      { columnDef: 'isActive', header: 'Active', format: (element: User) => `${element.isActive ? 'Yes' : 'No'}` },
+      { columnDef: 'createdAt', header: 'Created at', format: (element: User) => `${this.datePipe.transform(element.createdAt, DATETIME_FORMAT)}` },
+    ];
+    this.displayedColumns = this.columns.map(c => c.columnDef);
   }
 
   ngOnInit(): void {
@@ -32,16 +49,7 @@ export class UsersComponent extends BaseComponent implements OnInit {
     });
   }
 
-  columns = [
-    { columnDef: 'id', header: 'Id', cell: (element: User) => `${element.id}` },
-    { columnDef: 'fullName', header: 'Full name', cell: (element: User) => `${element.fullName}` },
-    { columnDef: 'email', header: 'Email', cell: (element: User) => `${element.email}` },
-    { columnDef: 'phone', header: 'Phone', cell: (element: User) => `${element.phone}` },
-    { columnDef: 'role', header: 'Role', cell: (element: User) => `${element.role}` },
-    { columnDef: 'subscription', header: 'Subscription', cell: (element: User) => `${element.subscription}` },
-    { columnDef: 'isActive', header: 'Active', cell: (element: User) => `${element.isActive ? 'Yes' : 'No'}` },
-    { columnDef: 'createdAt', header: 'Created at', cell: (element: User) => `${this.datePipe.transform(element.createdAt, 'dd/MM/yyyy HH:mm:ss')}` },
-  ];
-
-  displayedColumns = this.columns.map(c => c.columnDef);
+  navigateToUserDetails(id: string) {
+    this.router.navigate(['/users', id]);
+  }
 }
