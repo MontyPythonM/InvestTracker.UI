@@ -7,6 +7,7 @@ import { UserDetails } from '../../models/user-details.model';
 import { DATETIME_FORMAT } from '../../../../core/constants';
 import { PropertyField } from '../../../../shared/models/property-field.model';
 import { DatePipe } from '@angular/common';
+import { subscriptionChangeSourceObjects } from '../../enums/change-source.enum';
 
 @Component({
   selector: 'app-user-details',
@@ -49,7 +50,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         this.subscriptionFields = [
           { name: 'Subscription', value: this.user.subscription.value },
           { name: 'Expired at', value: `${this.datePipe.transform(this.user.subscription.expiredAt, this.dateTimeFormat)}` },
-          { name: 'Change source', value: this.user.subscription.changeSource.toString() },
+          { name: 'Change source', value: `${subscriptionChangeSourceObjects.find(x => x.index == this.user?.subscription.changeSource)?.value}` },
           { name: 'Granted by', value: this.user.subscription.grantedBy },
           { name: 'Granted at', value: `${this.datePipe.transform(this.user.subscription.grantedAt, this.dateTimeFormat)}` },
         ];
