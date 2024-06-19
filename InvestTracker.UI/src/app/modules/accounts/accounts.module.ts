@@ -11,6 +11,7 @@ import { Visibility } from '../../shared/enums/visibility.enum';
 import { SpinnerModule } from '../../shared/components/spinner/spinner.module';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { PropertyGridModule } from '../../shared/components/property-grid/property-grid.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     FormsModule,
     ReactiveFormsModule,
     SpinnerModule,
+    PropertyGridModule,
     RouterModule.forChild([
       {
         path: '',

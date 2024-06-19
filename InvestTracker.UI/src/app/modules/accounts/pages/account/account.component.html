@@ -1,14 +1,7 @@
 <div class="container" *ngIf="user">
   <div class="section">
     <h1 class="title">Account details</h1>
-    <p>ID: {{ user.id }}</p>
-    <p>Full Name: {{ user.fullName }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Phone: {{ user.phone }}</p>
-    <p>Active: {{ user.isActive }}</p>
-    <p>Role: {{ user.role }}</p>
-    <p>Subscription: {{ user.subscription }}</p>
-    <p>Created at: {{ user.createdAt | date: dateTimeFormat }}</p>
+    <app-property-grid [fields]="accountFields"></app-property-grid>
   </div>
   <div class="section">
     <h1 class="title">Delete account</h1>

@@ -6,6 +6,8 @@ import { ErrorResponse } from '../../../../shared/modules/error-response.model';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../../../shared/abstractions/base.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PropertyField } from '../../../../shared/models/property-field.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-account',
@@ -16,9 +18,11 @@ export class AccountComponent extends BaseComponent implements OnInit {
   user?: User;
   dateTimeFormat = DATETIME_FORMAT;
   deleteAccountForm: FormGroup;
+  accountFields: PropertyField[] = [];
   accountService = inject(AccountService);
   router = inject(Router);
   formBuilder = inject(FormBuilder);
+  datePipe = inject(DatePipe);
 
   constructor() {
     super();
@@ -31,6 +35,14 @@ export class AccountComponent extends BaseComponent implements OnInit {
     this.accountService.getCurrentUser().safeSubscribe(this, {
       next: (response) => {
         this.user = response.body as User;
+        this.accountFields = [
+          { name: 'ID', value: this.user.id },
+          { name: 'Full name', value: this.user.fullName },
+          { name: 'Email', value: this.user.email },
+          { name: 'Phone', value: this.user.phone },
+          { name: 'Active', value: this.user.isActive ? "Yes" : "No" },
+          { name: 'Created at', value: `${this.datePipe.transform(this.user.createdAt, DATETIME_FORMAT)}` },
+        ];
       }
     });
   }

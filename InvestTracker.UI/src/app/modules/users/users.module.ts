@@ -7,6 +7,7 @@ import { AccessGuardService } from '../../core/services/access-guard.service';
 import { Visibility } from '../../shared/enums/visibility.enum';
 import { SpinnerModule } from "../../shared/components/spinner/spinner.module";
 import { MaterialModule } from '../../shared/modules/material.module';
+import { PropertyGridModule } from '../../shared/components/property-grid/property-grid.module';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { MaterialModule } from '../../shared/modules/material.module';
         CommonModule,
         MaterialModule,
         SpinnerModule,
+        PropertyGridModule,
         RouterModule.forChild([
             {
                 path: '',
@@ -30,8 +32,7 @@ import { MaterialModule } from '../../shared/modules/material.module';
                 canActivate: [AccessGuardService],
                 data: { visibility: Visibility.Administrators }
             }
-        ]),
-        SpinnerModule
+        ])
     ]
 })
 export class UsersModule { }
