@@ -2,7 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { BaseComponent } from '../../../../shared/abstractions/base.component';
 import { User } from '../../../../core/models/user.model';
 import { UsersService } from '../../services/users.service';
-import { ErrorResponse } from '../../../../shared/modules/error-response.model';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { TableColumn } from '../../../../shared/models/table-column.interface';
@@ -39,12 +38,11 @@ export class UsersComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.usersService.getUsers().safeSubscribe(this, {
-        next: (response) => {
-          this.users = response.body as User[];
+        next: (response: User[]) => {
+          this.users = response;
         },
         error: (error) => {
-          let errors = error.error as ErrorResponse;
-          this.notifyService.show(`${errors.errors[0].exceptionMessage}`);
+          this.notifyService.showError(error);
         }
     });
   }

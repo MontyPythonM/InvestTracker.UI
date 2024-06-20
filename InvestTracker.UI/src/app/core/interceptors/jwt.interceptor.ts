@@ -5,6 +5,7 @@ import { Observable, catchError, switchMap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { NotifyService } from '../../shared/services/notify.service';
 import { ErrorResponse } from '../../shared/modules/error-response.model';
+import { AccessToken } from '../models/access-token.model';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -30,9 +31,9 @@ export class JwtInterceptor implements HttpInterceptor {
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
     if (this.authenticationService.isTokenExists()) {
       return this.authenticationService.refreshToken().pipe(
-        switchMap((data) => {
-          if (data.body?.token) {
-            this.authenticationService.setToken(data.body?.token);
+        switchMap((response: AccessToken) => {
+          if (response?.token) {
+            this.authenticationService.setToken(response?.token);
           }
           return next.handle(request.clone({ setHeaders: { 'Authorization': 'Bearer ' + this.authenticationService.getToken() }}))
         }),

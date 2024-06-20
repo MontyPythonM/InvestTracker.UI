@@ -13,6 +13,5 @@ export const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   body: {},
   observe: 'response' as 'body',
-  params: {},
   withCredentials: true
 };

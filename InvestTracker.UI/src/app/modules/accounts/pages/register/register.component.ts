@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import { RegisterForm } from '../../models/register-form.model';
 import { PHONE_REGEX } from '../../../../core/constants';
-import { NotifyService } from '../../../../shared/services/notify.service';
-import { ErrorResponse } from '../../../../shared/modules/error-response.model';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../../../shared/abstractions/base.component';
 
@@ -41,8 +39,7 @@ export class RegisterComponent extends BaseComponent {
         this.notifyService.show("Successfully registered");
       },
       error: (error) => {
-        let errors = error.error as ErrorResponse;
-        this.notifyService.show(`${errors.errors[0].exceptionMessage}`);
+        this.notifyService.showError(error);
       }
     });
   }

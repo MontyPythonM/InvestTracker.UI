@@ -4,7 +4,6 @@ import { AccountService } from '../../services/account.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../../../../shared/abstractions/base.component';
 import { ResetPasswordForm } from '../../models/reset-password-form.model';
-import { ErrorResponse } from '../../../../shared/modules/error-response.model';
 
 @Component({
   selector: 'app-reset-password',
@@ -41,8 +40,7 @@ export class ResetPasswordComponent extends BaseComponent {
         this.notifyService.show("New password has been saved");
       },
       error: (error) => {
-        let errors = error.error as ErrorResponse;
-        this.notifyService.show(`${errors.errors[0].exceptionMessage}`);
+        this.notifyService.showError(error);
       }
     });
   }

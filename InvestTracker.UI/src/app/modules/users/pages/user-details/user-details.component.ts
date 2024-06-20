@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { BaseComponent } from '../../../../shared/abstractions/base.component';
 import { UsersService } from '../../services/users.service';
-import { ErrorResponse } from '../../../../shared/modules/error-response.model';
 import { ActivatedRoute } from '@angular/router';
 import { UserDetails } from '../../models/user-details.model';
 import { DATETIME_FORMAT } from '../../../../core/constants';
@@ -32,8 +31,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.usersService.getUserDetails(this.userId).safeSubscribe(this, {
-      next: (response) => {
-        this.user = response.body as UserDetails;
+      next: (response: UserDetails) => {
+        this.user = response;
         this.accountFields = [
           { name: 'ID', value: this.user.id },
           { name: 'Full name', value: this.user.fullName },
@@ -51,13 +50,12 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
           { name: 'Subscription', value: this.user.subscription.value },
           { name: 'Expired at', value: `${this.datePipe.transform(this.user.subscription.expiredAt, this.dateTimeFormat)}` },
           { name: 'Change source', value: `${subscriptionChangeSourceObjects.find(x => x.index == this.user?.subscription.changeSource)?.value}` },
-          { name: 'Granted by', value: this.user.subscription.grantedBy },
+          { name: 'Granted by', value: `${this.user.subscription.grantedBy}` },
           { name: 'Granted at', value: `${this.datePipe.transform(this.user.subscription.grantedAt, this.dateTimeFormat)}` },
         ];
       },
       error: (error) => {
-        let errors = error.error as ErrorResponse;
-        this.notifyService.show(`${errors.errors[0].exceptionMessage}`);
+        this.notifyService.showError(error);
       }
     });
   }

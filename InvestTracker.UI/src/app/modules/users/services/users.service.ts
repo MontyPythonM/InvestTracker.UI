@@ -1,51 +1,43 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../../core/models/user.model';
 import { apiUrl } from '../../../shared/environments/api-urls';
-import { HTTP_OPTIONS } from '../../../core/constants';
 import { UserDetails } from '../models/user-details.model';
 import { SystemRole } from '../../../core/enums/system-role.enum';
 import { SystemSubscription } from '../../../core/enums/system-subscription.enum';
+import { HttpService } from '../../../shared/services/http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  httpClient = inject(HttpClient);
+  httpService = inject(HttpService);
 
-  getUserDetails(id: string) : Observable<HttpResponse<UserDetails>> {
-    let requestOptions = Object.assign({}, HTTP_OPTIONS);
-    return this.httpClient.get<HttpResponse<UserDetails>>(`${apiUrl.module.users}/users/${id}/details`, requestOptions);
+  getUserDetails(id: string) : Observable<UserDetails> {
+    return this.httpService.get<UserDetails>(`${apiUrl.module.users}/users/${id}`);
   }
 
-  getUsers() : Observable<HttpResponse<User[]>> {
-    let requestOptions = Object.assign({}, HTTP_OPTIONS);
-    return this.httpClient.get<HttpResponse<User[]>>(`${apiUrl.module.users}/users/all`, requestOptions);
+  getUsers() : Observable<User[]> {
+    return this.httpService.get<User[]>(`${apiUrl.module.users}/users`);
   }
 
-  setRole(userId: string, role: SystemRole) : Observable<HttpResponse<void>> {
-    let requestOptions = Object.assign({}, HTTP_OPTIONS);
-    return this.httpClient.patch<HttpResponse<void>>(`${apiUrl.module.users}/users/${userId}/set-role`, { role }, requestOptions);
+  setRole(userId: string, role: SystemRole) : Observable<void> {
+    return this.httpService.patch<void>(`${apiUrl.module.users}/users/${userId}/set-role`, { role });
   }
 
-  removeRole(userId: string) : Observable<HttpResponse<void>>  {
-    let requestOptions = Object.assign({}, HTTP_OPTIONS);
-    return this.httpClient.patch<HttpResponse<void>>(`${apiUrl.module.users}/users/${userId}/remove-role`, {}, requestOptions);
+  removeRole(userId: string) : Observable<void>  {
+    return this.httpService.patch<void>(`${apiUrl.module.users}/users/${userId}/remove-role`);
   }
 
-  setSubscription(userId: string, subscription: SystemSubscription, expiredAt?: Date | undefined) : Observable<HttpResponse<void>>  {
-    let requestOptions = Object.assign({}, HTTP_OPTIONS);
-    return this.httpClient.patch<HttpResponse<void>>(`${apiUrl.module.users}/users/${userId}/set-subscription`, { subscription, expiredAt }, requestOptions);
+  setSubscription(userId: string, subscription: SystemSubscription, expiredAt?: Date | undefined) : Observable<void>  {
+    return this.httpService.patch<void>(`${apiUrl.module.users}/users/${userId}/set-subscription`, { subscription, expiredAt });
   }
 
-  activate(userId: string) : Observable<HttpResponse<void>>  {
-    let requestOptions = Object.assign({}, HTTP_OPTIONS);
-    return this.httpClient.patch<HttpResponse<void>>(`${apiUrl.module.users}/users/${userId}/activate`, {}, requestOptions);
+  activate(userId: string) : Observable<void>  {
+    return this.httpService.patch<void>(`${apiUrl.module.users}/users/${userId}/activate`);
   }
 
-  deactivate(userId: string) : Observable<HttpResponse<void>>  {
-    let requestOptions = Object.assign({}, HTTP_OPTIONS);
-    return this.httpClient.patch<HttpResponse<void>>(`${apiUrl.module.users}/users/${userId}/deactivate`, {}, requestOptions);
+  deactivate(userId: string) : Observable<void> {
+    return this.httpService.patch<void>(`${apiUrl.module.users}/users/${userId}/deactivate`);
   }
 }

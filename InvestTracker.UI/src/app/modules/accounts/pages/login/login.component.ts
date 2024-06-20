@@ -4,7 +4,6 @@ import { AccountService } from '../../services/account.service';
 import { LoginForm } from '../../models/login-form.model';
 import { AccessToken } from '../../../../core/models/access-token.model';
 import { Router } from '@angular/router';
-import { ErrorResponse } from '../../../../shared/modules/error-response.model';
 import { BaseComponent } from '../../../../shared/abstractions/base.component';
 
 @Component({
@@ -34,15 +33,13 @@ export class LoginComponent extends BaseComponent {
     const loginFormModel = new LoginForm(this.email!.value, this.password.value);
 
     this.accountService.login(loginFormModel).safeSubscribe(this, {
-      next: (data) => {
-        let accessToken = data.body as AccessToken;
-        this.authenticationService.setToken(accessToken.token);
+      next: (response: AccessToken) => {
+        this.authenticationService.setToken(response.token);
         this.router.navigateByUrl('/');
         this.notifyService.show("Successfully logged in");
       },
       error: (error) => {
-        let errors = error.error as ErrorResponse;
-        this.notifyService.show(`${errors.errors[0].exceptionMessage}`);
+        this.notifyService.showError(error);
       }
     });
   }

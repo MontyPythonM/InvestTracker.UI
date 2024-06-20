@@ -33,8 +33,8 @@ export class AccountComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.getCurrentUser().safeSubscribe(this, {
-      next: (response) => {
-        this.user = response.body as User;
+      next: (response: User) => {
+        this.user = response;
         this.accountFields = [
           { name: 'ID', value: this.user.id },
           { name: 'Full name', value: this.user.fullName },
@@ -58,10 +58,8 @@ export class AccountComponent extends BaseComponent implements OnInit {
         this.authenticationService.clearToken();
         this.router.navigateByUrl('/home');
       },
-      error: (error) => {
-        console.log(error);
-        let errors = error.error as ErrorResponse;
-        this.notifyService.show(`${errors.errors[0].exceptionMessage}`);
+      error: (error: ErrorResponse) => {
+        this.notifyService.showError(error);
       }
     });
   }
