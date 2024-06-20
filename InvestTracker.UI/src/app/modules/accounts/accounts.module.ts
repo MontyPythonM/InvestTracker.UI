@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AccessGuardService } from '../../core/services/access-guard.service';
-import { Visibility } from '../../shared/enums/visibility.enum';
+import { Visibility } from '../../core/enums/visibility.enum';
 import { SpinnerModule } from '../../shared/components/spinner/spinner.module';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';

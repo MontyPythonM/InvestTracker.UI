@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { User } from '../../../../core/models/user.model';
 import { AccountService } from '../../services/account.service';
 import { DATETIME_FORMAT } from '../../../../core/constants';
-import { ErrorResponse } from '../../../../shared/modules/error-response.model';
+import { ErrorResponse } from '../../../../shared/models/error-response.model';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../../../shared/abstractions/base.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -51,7 +51,6 @@ export class AccountComponent extends BaseComponent implements OnInit {
     if (this.deleteAccountForm.invalid) {
       return;
     }
-
     this.accountService.deleteAccount(this.password.value).safeSubscribe(this, {
       next: () => {
         this.notifyService.show("Account has been permanently deleted");

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccessGuardService } from './core/services/access-guard.service';
-import { Visibility } from './shared/enums/visibility.enum';
+import { Visibility } from './core/enums/visibility.enum';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule)},

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Visibility } from '../../shared/enums/visibility.enum';
+import { Visibility } from '../enums/visibility.enum';
 import { SystemRole } from '../enums/system-role.enum';
 import { SystemSubscription } from '../enums/system-subscription.enum';
 import { Jwt } from '../models/jwt.model';

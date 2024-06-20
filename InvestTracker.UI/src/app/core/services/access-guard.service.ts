@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
 import { VisibilityService } from './visibility.service';
-import { Visibility } from '../../shared/enums/visibility.enum';
+import { Visibility } from '../enums/visibility.enum';
 
 @Injectable({
   providedIn: 'root'

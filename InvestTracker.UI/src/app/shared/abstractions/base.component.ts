@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Observable, Subject, Subscription, catchError, takeUntil, throwError } from 'rxjs';
 import { AuthenticationService } from '../../core/services/authentication.service';
-import { Visibility } from '../enums/visibility.enum';
+import { Visibility } from '../../core/enums/visibility.enum';
 import { VisibilityService } from '../../core/services/visibility.service';
 import { NotifyService } from '../services/notify.service';
 

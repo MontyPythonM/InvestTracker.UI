@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { ErrorResponse } from '../modules/error-response.model';
+import { ErrorResponse } from '../models/error-response.model';
 
 @Injectable({
   providedIn: 'root'

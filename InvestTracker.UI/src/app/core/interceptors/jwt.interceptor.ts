@@ -4,7 +4,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { NotifyService } from '../../shared/services/notify.service';
-import { ErrorResponse } from '../../shared/modules/error-response.model';
+import { ErrorResponse } from '../../shared/models/error-response.model';
 import { AccessToken } from '../models/access-token.model';
 
 @Injectable()

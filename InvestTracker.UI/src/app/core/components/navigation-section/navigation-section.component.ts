@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { SectionModel } from '../../../core/models/section.model';
 import { Router } from '@angular/router';
-import { Visibility } from '../../../shared/enums/visibility.enum';
+import { Visibility } from '../../enums/visibility.enum';
 import { BaseComponent } from '../../../shared/abstractions/base.component';
 
 @Component({

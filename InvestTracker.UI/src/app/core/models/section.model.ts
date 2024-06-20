@@ -1,4 +1,4 @@
-import { Visibility } from "../../shared/enums/visibility.enum";
+import { Visibility } from "../enums/visibility.enum";
 
 export class SectionModel {
   name: string;
