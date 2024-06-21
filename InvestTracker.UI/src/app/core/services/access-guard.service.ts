@@ -1,22 +1,22 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
-import { VisibilityService } from './visibility.service';
-import { Visibility } from '../enums/visibility.enum';
+import { AccessService } from './access.service';
+import { Access } from '../enums/access.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccessGuardService implements CanActivate  {
   authenticationService = inject(AuthenticationService);
-  visibilityService = inject(VisibilityService);
+  accessService = inject(AccessService);
   router = inject(Router);
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
-    const visibility = route.data['visibility'] as Visibility ?? Visibility.Everyone;
+    const access = route.data['access'] as Access ?? Access.Everyone;
     const jwt = this.authenticationService.getDecodedToken();
 
-    if (this.visibilityService.isVisibleFor(visibility, jwt)) {
+    if (this.accessService.isAccessibleFor(access, jwt)) {
       return true;
     }
 

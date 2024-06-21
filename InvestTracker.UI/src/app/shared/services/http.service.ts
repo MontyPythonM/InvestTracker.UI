@@ -1,5 +1,5 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { HTTP_OPTIONS } from '../../core/constants';
 
@@ -7,8 +7,7 @@ import { HTTP_OPTIONS } from '../../core/constants';
   providedIn: 'root'
 })
 export abstract class HttpService {
-
-  constructor(protected httpClient: HttpClient) { }
+  private httpClient = inject(HttpClient);
 
   post<T>(uri: string, body?: object, options?: {}) : Observable<T> {
     return this.sendRequest<T>('POST', uri, body, options)

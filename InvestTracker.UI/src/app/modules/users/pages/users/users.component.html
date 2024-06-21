@@ -1,14 +1,11 @@
 <div class="container" *ngIf="users">
   <mat-table [dataSource]="users" class="table">
-
     <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
       <mat-header-cell *matHeaderCellDef>{{ column.header }}</mat-header-cell>
       <mat-cell *matCellDef="let row" [innerHtml]="column.format(row)"></mat-cell>
     </ng-container>
-
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToUserDetails(row.id)"></mat-row>
-
   </mat-table>
 </div>
 <app-spinner [isVisible]="!users?.length"></app-spinner>

@@ -13,7 +13,13 @@ import { Component, Input } from '@angular/core';
     </mat-progress-spinner>
   </div>
   `,
-  styleUrl: './spinner.component.scss'
+  styles: `
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  `
 })
 export class SpinnerComponent {
   @Input() isVisible: boolean = false;

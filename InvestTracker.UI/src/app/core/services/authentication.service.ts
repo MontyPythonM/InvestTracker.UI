@@ -5,15 +5,13 @@ import { Jwt } from '../models/jwt.model';
 import { Observable } from 'rxjs';
 import { AccessToken } from '../models/access-token.model';
 import { apiUrl } from '../../shared/environments/api-urls';
-import { NotifyService } from '../../shared/services/notify.service';
 import { HttpService } from '../../shared/services/http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  httpService = inject(HttpService);
-  notifyService = inject(NotifyService);
+  private httpService = inject(HttpService);
 
   getToken() : string | null {
     return localStorage.getItem(ACCESS_TOKEN_KEY);

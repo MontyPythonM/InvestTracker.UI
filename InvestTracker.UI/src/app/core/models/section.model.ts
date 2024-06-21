@@ -1,15 +1,15 @@
-import { Visibility } from "../enums/visibility.enum";
+import { Access } from "../enums/access.enum";
 
 export class SectionModel {
   name: string;
   path: string;
   icon: string;
-  visibility: Visibility;
+  access: Access;
 
-  constructor(name: string, path: string, icon: string, visibility: Visibility) {
+  constructor(name: string, path: string, icon: string, access: Access) {
     this.name = name;
     this.path = path;
     this.icon = icon;
-    this.visibility = visibility;
+    this.access = access;
   }
 }

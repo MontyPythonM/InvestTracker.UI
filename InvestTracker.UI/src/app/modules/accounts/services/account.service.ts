@@ -12,7 +12,7 @@ import { HttpService } from '../../../shared/services/http.service';
   providedIn: 'root'
 })
 export class AccountService {
-  httpService = inject(HttpService);
+  private httpService = inject(HttpService);
 
   login(loginForm: LoginForm) : Observable<AccessToken> {
     return this.httpService.post<AccessToken>(`${apiUrl.module.users}/accounts/sign-in`, loginForm);

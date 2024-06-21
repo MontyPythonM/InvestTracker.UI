@@ -35,7 +35,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         this.notifyService.showError('Internal server error');
       }
       else if (error.status === 0) {
-        this.notifyService.showError('Server not responding');
+        this.notifyService.showError('Server is not responding');
       }
       else {
         this.notifyService.showError('An undefined error has occurred');

@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DateTimeService } from '../../../../shared/services/date-time.service';
 import { SetSubscriptionComponent } from '../../components/set-subscription/set-subscription.component';
 import { SetRoleComponent } from '../../components/set-role/set-role.component';
+import { Access } from '../../../../core/enums/access.enum';
 
 @Component({
   selector: 'app-user-details',
@@ -21,6 +22,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
   accountFields: PropertyField[] = [];
   roleFields: PropertyField[] = [];
   subscriptionFields: PropertyField[] = [];
+  isCurrentUserAccount: boolean;
+  isSystemAdministrator: boolean;
   usersService = inject(UsersService);
   route = inject(ActivatedRoute);
   dialog = inject(MatDialog);
@@ -29,6 +32,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
   constructor() {
     super();
     this.userId = this.route.snapshot.params['id'];
+    this.isCurrentUserAccount = this.authenticationService.getDecodedToken()?.sub === this.userId;
+    this.isSystemAdministrator = this.isAccessibleFor(Access.SystemAdministrators);
   }
 
   ngOnInit(): void {

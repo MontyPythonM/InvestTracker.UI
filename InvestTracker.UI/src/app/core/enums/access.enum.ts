@@ -1,4 +1,4 @@
-export enum Visibility {
+export enum Access {
   None,
   NonLoggedInUsers,
   LoggedInUsers,

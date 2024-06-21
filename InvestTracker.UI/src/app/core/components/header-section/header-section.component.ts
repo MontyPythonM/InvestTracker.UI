@@ -5,7 +5,7 @@ import { ThemeService } from '../../services/theme.service';
 import { Theme } from '../../enums/theme.enum';
 import { NavStateService } from '../../services/nav-state.service';
 import { BaseComponent } from '../../../shared/abstractions/base.component';
-import { Visibility } from '../../enums/visibility.enum';
+import { Access } from '../../enums/access.enum';
 
 @Component({
   selector: 'app-header-section',
@@ -26,8 +26,8 @@ export class HeaderSectionComponent extends BaseComponent {
     super();
     this.isDarkTheme = this.themeService.themeSignal() === Theme.Dark;
     this.sections = [
-      { name: "Register", path: "/account/register", icon: "home", visibility: Visibility.NonLoggedInUsers },
-      { name: "Login", path: "/account/login", icon: "login", visibility: Visibility.NonLoggedInUsers },
+      { name: "Register", path: "/account/register", icon: "home", access: Access.NonLoggedInUsers },
+      { name: "Login", path: "/account/login", icon: "login", access: Access.NonLoggedInUsers },
     ];
   }
 

@@ -11,7 +11,7 @@ import { HttpService } from '../../../shared/services/http.service';
   providedIn: 'root'
 })
 export class UsersService {
-  httpService = inject(HttpService);
+  private httpService = inject(HttpService);
 
   getUserDetails(id: string) : Observable<UserDetails> {
     return this.httpService.get<UserDetails>(`${apiUrl.module.users}/users/${id}`);
