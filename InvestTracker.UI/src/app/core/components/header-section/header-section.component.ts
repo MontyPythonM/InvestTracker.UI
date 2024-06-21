@@ -6,6 +6,7 @@ import { Theme } from '../../enums/theme.enum';
 import { NavStateService } from '../../services/nav-state.service';
 import { BaseComponent } from '../../../shared/abstractions/base.component';
 import { Access } from '../../enums/access.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-section',
@@ -15,6 +16,7 @@ import { Access } from '../../enums/access.enum';
 export class HeaderSectionComponent extends BaseComponent {
   themeService = inject(ThemeService);
   navStateService = inject(NavStateService);
+  router = inject(Router);
 
   @Output() menuToggle = new EventEmitter<void>();
   appName: string = APP_NAME;
@@ -49,5 +51,6 @@ export class HeaderSectionComponent extends BaseComponent {
     });
     this.authenticationService.clearToken();
     this.notifyService.show("Successfully logged out");
+    this.router.navigateByUrl('/home');
   }
 }

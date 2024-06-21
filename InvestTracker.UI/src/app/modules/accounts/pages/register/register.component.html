@@ -25,7 +25,7 @@
         <mat-error *ngIf="phone?.hasError('required')">Phone number is required</mat-error>
         <mat-error *ngIf="phone?.hasError('pattern')">Phone number has wrong format</mat-error>
       </mat-form-field>
-      <button mat-button [disabled]="!registerForm.valid" mat-raised-button color="primary" class="submit-button">Register</button>
+      <button mat-raised-button [disabled]="!registerForm.valid" color="primary" class="submit-button">Register</button>
     </div>
   </form>
 </div>

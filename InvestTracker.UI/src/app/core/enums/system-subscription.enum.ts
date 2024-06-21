@@ -4,3 +4,10 @@ export enum SystemSubscription {
   ProfessionalInvestor = 'ProfessionalInvestor',
   Advisor = 'Advisor'
 }
+
+export const systemSubscriptions: string[] = [
+  SystemSubscription.None,
+  SystemSubscription.StandardInvestor,
+  SystemSubscription.ProfessionalInvestor,
+  SystemSubscription.Advisor
+];

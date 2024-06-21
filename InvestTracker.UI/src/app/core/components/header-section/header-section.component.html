@@ -24,7 +24,7 @@
         <span>{{ section.name }}</span>
       </a>
     </div>
-    <a *ngIf="isAuthenticated()" class="button-right" mat-mini-fab color="primary" routerLink="/" (click)="logout()">
+    <a *ngIf="isAuthenticated()" class="button-right" mat-mini-fab color="primary" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
     </a>
   </div>

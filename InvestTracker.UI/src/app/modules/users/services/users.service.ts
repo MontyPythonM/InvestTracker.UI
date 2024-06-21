@@ -25,10 +25,6 @@ export class UsersService {
     return this.httpService.patch<void>(`${apiUrl.module.users}/users/${userId}/set-role`, { role });
   }
 
-  removeRole(userId: string) : Observable<void>  {
-    return this.httpService.patch<void>(`${apiUrl.module.users}/users/${userId}/remove-role`);
-  }
-
   setSubscription(userId: string, subscription: SystemSubscription, expiredAt?: Date | undefined) : Observable<void>  {
     return this.httpService.patch<void>(`${apiUrl.module.users}/users/${userId}/set-subscription`, { subscription, expiredAt });
   }

@@ -45,8 +45,8 @@ export class AuthenticationService {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
   }
 
-  revokeToken() : Observable<void> {
-    return this.httpService.post<void>(`${apiUrl.module.users}/accounts/revoke-token`);
+  revokeToken(userId?: string) : Observable<void> {
+    return this.httpService.post<void>(`${apiUrl.module.users}/accounts/revoke-token/${userId ?? ''}`);
   }
 
   refreshToken() : Observable<AccessToken> {

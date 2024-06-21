@@ -4,12 +4,14 @@ import { UsersService } from '../../services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserDetails } from '../../models/user-details.model';
 import { PropertyField } from '../../../../shared/models/property-field.model';
-import { subscriptionChangeSourceObjects } from '../../enums/change-source.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { DateTimeService } from '../../../../shared/services/date-time.service';
 import { SetSubscriptionComponent } from '../../components/set-subscription/set-subscription.component';
 import { SetRoleComponent } from '../../components/set-role/set-role.component';
 import { Access } from '../../../../core/enums/access.enum';
+import { enumToObjects } from '../../../../shared/converters/enum.converter';
+import { SubscriptionChangeSource } from '../../enums/change-source.enum';
+import { AccountService } from '../../../accounts/services/account.service';
 
 @Component({
   selector: 'app-user-details',
@@ -25,9 +27,11 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
   isCurrentUserAccount: boolean;
   isSystemAdministrator: boolean;
   usersService = inject(UsersService);
+  accountService = inject(AccountService);
   route = inject(ActivatedRoute);
   dialog = inject(MatDialog);
   dateTimeService = inject(DateTimeService);
+  private subscriptionChangeSource = enumToObjects(SubscriptionChangeSource);
 
   constructor() {
     super();
@@ -37,7 +41,9 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUserDetails();
+    this.dialog.afterAllClosed.safeSubscribe(this, {
+      next: () => this.getUserDetails()
+    });
   }
 
   getUserDetails() {
@@ -67,12 +73,24 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     })
   }
 
+  revokeRefreshToken() {
+    this.authenticationService.revokeToken(this.userId).safeSubscribe(this, {
+      next: () => {
+        this.notifyService.show('User refresh token revoked')
+      }
+    })
+  }
+
   openSetSubscriptionDialog() {
-    this.dialog.open(SetSubscriptionComponent);
+    this.dialog.open(SetSubscriptionComponent, {
+      data: { userId: this.userId, role: this.user?.role.value }
+    });
   }
 
   openSetRoleDialog() {
-    this.dialog.open(SetRoleComponent);
+    this.dialog.open(SetRoleComponent, {
+      data: { userId: this.userId, role: this.user?.role.value }
+    });
   }
 
   private setFields(user: UserDetails) {
@@ -92,7 +110,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     this.subscriptionFields = [
       { name: 'Subscription', value: user.subscription.value },
       { name: 'Expired at', value: this.dateTimeService.formatDateTime(user.subscription.expiredAt) },
-      { name: 'Change source', value: `${subscriptionChangeSourceObjects.find(x => x.index == this.user?.subscription.changeSource)?.value}` },
+      { name: 'Change source', value: `${this.subscriptionChangeSource.find(x => x.index == this.user?.subscription.changeSource)?.value}` },
       { name: 'Granted by', value: `${user.subscription.grantedBy}` },
       { name: 'Granted at', value: this.dateTimeService.formatDateTime(user.subscription.grantedAt) },
     ];

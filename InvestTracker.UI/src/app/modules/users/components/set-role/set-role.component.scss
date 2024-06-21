@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  padding: 10px 60px 30px 60px;
+  background-color: whitesmoke;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.role-field {
+  width: 400px;
+  margin-bottom: 10px;
+}
+
+.submit-button {
+  width: 100px;
+  padding: 20px 0 20px 0;
+  margin-left: 10px;
+}
+
+.close-button {
+  width: 100px;
+  padding: 20px 0 20px 0;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 220px;
+}
+
+.close-icon {
+  left: 55%;
+}
