@@ -8,11 +8,15 @@ import { Visibility } from '../../core/enums/visibility.enum';
 import { SpinnerModule } from "../../shared/components/spinner/spinner.module";
 import { MaterialModule } from '../../shared/modules/material.module';
 import { PropertyGridModule } from '../../shared/components/property-grid/property-grid.module';
+import { SetSubscriptionComponent } from './components/set-subscription/set-subscription.component';
+import { SetRoleComponent } from './components/set-role/set-role.component';
 
 @NgModule({
     declarations: [
         UsersComponent,
-        UserDetailsComponent
+        UserDetailsComponent,
+        SetSubscriptionComponent,
+        SetRoleComponent
     ],
     imports: [
         CommonModule,

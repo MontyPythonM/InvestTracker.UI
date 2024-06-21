@@ -1,13 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { User } from '../../../../core/models/user.model';
 import { AccountService } from '../../services/account.service';
-import { DATETIME_FORMAT } from '../../../../core/constants';
 import { ErrorResponse } from '../../../../shared/models/error-response.model';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../../../shared/abstractions/base.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PropertyField } from '../../../../shared/models/property-field.model';
-import { DatePipe } from '@angular/common';
+import { DateTimeService } from '../../../../shared/services/date-time.service';
 
 @Component({
   selector: 'app-account',
@@ -16,13 +15,12 @@ import { DatePipe } from '@angular/common';
 })
 export class AccountComponent extends BaseComponent implements OnInit {
   user?: User;
-  dateTimeFormat = DATETIME_FORMAT;
   deleteAccountForm: FormGroup;
   accountFields: PropertyField[] = [];
   accountService = inject(AccountService);
   router = inject(Router);
   formBuilder = inject(FormBuilder);
-  datePipe = inject(DatePipe);
+  dateTimeService = inject(DateTimeService);
 
   constructor() {
     super();
@@ -40,8 +38,10 @@ export class AccountComponent extends BaseComponent implements OnInit {
           { name: 'Full name', value: this.user.fullName },
           { name: 'Email', value: this.user.email },
           { name: 'Phone', value: this.user.phone },
+          { name: 'Role', value: this.user.role },
+          { name: 'Subscription', value: this.user.subscription },
           { name: 'Active', value: this.user.isActive ? "Yes" : "No" },
-          { name: 'Created at', value: `${this.datePipe.transform(this.user.createdAt, DATETIME_FORMAT)}` },
+          { name: 'Created at', value: this.dateTimeService.formatDateTime(this.user.createdAt) },
         ];
       }
     });
@@ -56,9 +56,6 @@ export class AccountComponent extends BaseComponent implements OnInit {
         this.notifyService.show("Account has been permanently deleted");
         this.authenticationService.clearToken();
         this.router.navigateByUrl('/home');
-      },
-      error: (error: ErrorResponse) => {
-        this.notifyService.showError(error);
       }
     });
   }

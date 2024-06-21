@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { DatePipe } from '@angular/common';
+import { ErrorHandlerInterceptor } from './core/interceptors/error-handler.interceptor';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { DatePipe } from '@angular/common';
   ],
   providers: [
     DatePipe,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

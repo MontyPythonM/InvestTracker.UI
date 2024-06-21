@@ -31,9 +31,6 @@ export class ForgotPasswordComponent extends BaseComponent {
       next: () => {
         this.emailSent = true;
         this.notifyService.show("Email was sent with a link to reset your password. Check your inbox");
-      },
-      error: (error) => {
-        this.notifyService.showError(error);
       }
     });
   }

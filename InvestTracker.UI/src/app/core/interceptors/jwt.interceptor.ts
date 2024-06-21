@@ -3,15 +3,12 @@ import { Injectable, inject } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { NotifyService } from '../../shared/services/notify.service';
-import { ErrorResponse } from '../../shared/models/error-response.model';
 import { AccessToken } from '../models/access-token.model';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   authenticationService = inject(AuthenticationService);
   router = inject(Router);
-  notifyService = inject(NotifyService);
 
   intercept = (request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> => {
     if (this.authenticationService.hasValidToken()) {
@@ -41,8 +38,6 @@ export class JwtInterceptor implements HttpInterceptor {
           if (error.status === 400) {
             this.authenticationService.clearToken();
             this.router.navigateByUrl('/');
-            let errors = error.error as ErrorResponse;
-            this.notifyService.show(`${errors.errors[0].exceptionMessage}`);
           }
           return throwError(() => error);
         })

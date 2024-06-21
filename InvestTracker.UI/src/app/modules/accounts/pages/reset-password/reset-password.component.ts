@@ -38,9 +38,6 @@ export class ResetPasswordComponent extends BaseComponent {
       next: () => {
         this.router.navigateByUrl('/');
         this.notifyService.show("New password has been saved");
-      },
-      error: (error) => {
-        this.notifyService.showError(error);
       }
     });
   }

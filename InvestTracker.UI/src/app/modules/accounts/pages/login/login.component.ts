@@ -37,9 +37,6 @@ export class LoginComponent extends BaseComponent {
         this.authenticationService.setToken(response.token);
         this.router.navigateByUrl('/');
         this.notifyService.show("Successfully logged in");
-      },
-      error: (error) => {
-        this.notifyService.showError(error);
       }
     });
   }

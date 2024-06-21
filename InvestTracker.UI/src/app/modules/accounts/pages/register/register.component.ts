@@ -37,9 +37,6 @@ export class RegisterComponent extends BaseComponent {
       next: () => {
         this.router.navigateByUrl('/account/login');
         this.notifyService.show("Successfully registered");
-      },
-      error: (error) => {
-        this.notifyService.showError(error);
       }
     });
   }

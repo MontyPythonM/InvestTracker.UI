@@ -4,6 +4,7 @@ export enum SubscriptionChangeSource {
   NeverChanged,
   FromPayment,
   FromAdministrator,
+  Expired
 }
 
 export const subscriptionChangeSourceObjects = enumToObjects(SubscriptionChangeSource);

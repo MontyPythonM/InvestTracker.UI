@@ -1,12 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { ErrorResponse } from '../models/error-response.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotifyService {
-  snackBar = inject(MatSnackBar);
+  private snackBar = inject(MatSnackBar);
 
   show(message: string, action: string = 'Ok', duration: number = 4000, horizontalPosition: MatSnackBarHorizontalPosition = 'right',
     notifyVerticalPosition: MatSnackBarVerticalPosition = 'bottom', panelClasses: string[] = []): void {
@@ -18,13 +17,7 @@ export class NotifyService {
     });
   }
 
-  showError(err: any) {
-    try {
-      let errors = err.error as ErrorResponse;
-      this.show(errors.errors[0].exceptionMessage, 'Ok', 4000, 'right', 'bottom', ['error-snackbar']);
-    }
-    catch {
-      this.show('An undefined error has occurred', 'Ok', 4000, 'right', 'bottom', ['error-snackbar']);
-    }
+  showError(message: string) {
+    this.show(message, 'Ok', 4000, 'right', 'bottom', ['error-snackbar']);
   }
 }

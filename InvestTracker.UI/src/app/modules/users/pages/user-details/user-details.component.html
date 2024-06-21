@@ -1,7 +1,27 @@
 <div class="container" *ngIf="user">
-  <a class="back-button" mat-mini-fab color="primary" routerLink="/users">
-    <mat-icon>arrow_back</mat-icon>
-  </a>
+  <div class="buttons-bar">
+    <button mat-mini-fab color="secondary" routerLink="/users">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div>
+      <button mat-raised-button color="primary" class="button" (click)="openSetSubscriptionDialog()">
+        <mat-icon>edit</mat-icon>
+        <span>Set Subscription</span>
+      </button>
+      <button mat-raised-button color="primary" class="button" (click)="openSetRoleDialog()">
+        <mat-icon>edit</mat-icon>
+        <span>Set Role</span>
+      </button>
+      <button *ngIf="user.isActive" mat-raised-button color="primary" class="button block-button" (click)="block()">
+        <mat-icon>person_off</mat-icon>
+        <span>Block</span>
+      </button>
+      <button *ngIf="!user.isActive" mat-raised-button color="primary" class="button block-button" (click)="unblock()">
+        <mat-icon>person</mat-icon>
+        <span>Unblock</span>
+      </button>
+    </div>
+  </div>
   <div class="section">
     <h1 class="title">Account details</h1>
     <app-property-grid [fields]="accountFields"></app-property-grid>
@@ -16,3 +36,4 @@
   </div>
 </div>
 <app-spinner [isVisible]="!user"></app-spinner>
+

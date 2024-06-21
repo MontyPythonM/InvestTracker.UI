@@ -2,10 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { BaseComponent } from '../../../../shared/abstractions/base.component';
 import { User } from '../../../../core/models/user.model';
 import { UsersService } from '../../services/users.service';
-import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { TableColumn } from '../../../../shared/models/table-column.interface';
-import { DATETIME_FORMAT } from '../../../../core/constants';
+import { DateTimeService } from '../../../../shared/services/date-time.service';
 
 @Component({
   selector: 'app-users',
@@ -17,8 +16,8 @@ export class UsersComponent extends BaseComponent implements OnInit {
   columns: TableColumn<User>[];
   displayedColumns: string[];
   usersService = inject(UsersService);
-  datePipe = inject(DatePipe);
   router = inject(Router);
+  dateTimeService = inject(DateTimeService);
 
   constructor() {
     super();
@@ -31,7 +30,7 @@ export class UsersComponent extends BaseComponent implements OnInit {
       { columnDef: 'role', header: 'Role', format: (element: User) => `${element.role}` },
       { columnDef: 'subscription', header: 'Subscription', format: (element: User) => `${element.subscription}` },
       { columnDef: 'isActive', header: 'Active', format: (element: User) => `${element.isActive ? 'Yes' : 'No'}` },
-      { columnDef: 'createdAt', header: 'Created at', format: (element: User) => `${this.datePipe.transform(element.createdAt, DATETIME_FORMAT)}` },
+      { columnDef: 'createdAt', header: 'Created at', format: (element: User) => this.dateTimeService.formatDateTime(element.createdAt) },
     ];
     this.displayedColumns = this.columns.map(c => c.columnDef);
   }
@@ -40,9 +39,6 @@ export class UsersComponent extends BaseComponent implements OnInit {
     this.usersService.getUsers().safeSubscribe(this, {
         next: (response: User[]) => {
           this.users = response;
-        },
-        error: (error) => {
-          this.notifyService.showError(error);
         }
     });
   }

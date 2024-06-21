@@ -13,6 +13,18 @@
   margin-bottom: 30px;
 }
 
-.back-button {
+.buttons-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 25px;
+}
+
+.button {
+  margin-left: 15px;
+}
+
+.block-button {
+  background-color: darkred;
 }
