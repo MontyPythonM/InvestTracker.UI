@@ -4,14 +4,16 @@ import { UsersService } from '../../services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserDetails } from '../../models/user-details.model';
 import { PropertyField } from '../../../../shared/models/property-field.model';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DateTimeService } from '../../../../shared/services/date-time.service';
 import { SetSubscriptionComponent } from '../../components/set-subscription/set-subscription.component';
 import { SetRoleComponent } from '../../components/set-role/set-role.component';
 import { Access } from '../../../../core/enums/access.enum';
 import { enumToObjects } from '../../../../shared/converters/enum.converter';
 import { SubscriptionChangeSource } from '../../enums/change-source.enum';
-import { AccountService } from '../../../accounts/services/account.service';
+import { SystemRole } from '../../../../core/enums/system-role.enum';
+import { SetSubscription } from '../../models/set-subscription.model';
+import { of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-user-details',
@@ -26,11 +28,11 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
   subscriptionFields: PropertyField[] = [];
   isCurrentUserAccount: boolean;
   isSystemAdministrator: boolean;
-  usersService = inject(UsersService);
-  accountService = inject(AccountService);
-  route = inject(ActivatedRoute);
-  dialog = inject(MatDialog);
-  dateTimeService = inject(DateTimeService);
+  setRoleDialog?: MatDialogRef<SetRoleComponent, any>;
+  private usersService = inject(UsersService);
+  private route = inject(ActivatedRoute);
+  private dialog = inject(MatDialog);
+  private dateTimeService = inject(DateTimeService);
   private subscriptionChangeSource = enumToObjects(SubscriptionChangeSource);
 
   constructor() {
@@ -41,9 +43,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dialog.afterAllClosed.safeSubscribe(this, {
-      next: () => this.getUserDetails()
-    });
+    this.getUserDetails();
   }
 
   getUserDetails() {
@@ -55,7 +55,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     });
   }
 
-  block() {
+  blockUser() {
     this.usersService.deactivate(this.userId).safeSubscribe(this, {
       next: () => {
         this.notifyService.show(`${this.user?.fullName} account deactivated`);
@@ -64,7 +64,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     })
   }
 
-  unblock() {
+  unblockUser() {
     this.usersService.activate(this.userId).safeSubscribe(this, {
       next: () => {
         this.notifyService.show(`${this.user?.fullName} account activated`);
@@ -73,7 +73,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     })
   }
 
-  revokeRefreshToken() {
+  revokeUserRefreshToken() {
     this.authenticationService.revokeToken(this.userId).safeSubscribe(this, {
       next: () => {
         this.notifyService.show('User refresh token revoked')
@@ -81,15 +81,55 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     })
   }
 
-  openSetSubscriptionDialog() {
-    this.dialog.open(SetSubscriptionComponent, {
+  openSetRoleDialog() {
+    const dialog = this.setRoleDialog = this.dialog.open(SetRoleComponent, {
       data: { userId: this.userId, role: this.user?.role.value }
+    })
+
+    let isRoleChanged: boolean = false;
+    let selectedRole: SystemRole | undefined;
+
+    dialog.afterClosed().pipe(tap((role: SystemRole) => {
+      isRoleChanged = role !== undefined;
+      selectedRole = role;
+    }), switchMap((role: SystemRole) => {
+      if (role) {
+        return this.usersService.setRole(this.userId, role)
+      }
+      return of(null);
+    })).safeSubscribe(this, {
+      next: () => {
+        if (isRoleChanged) {
+          this.notifyService.show(`User subscription changed on ${selectedRole}`);
+          this.getUserDetails();
+        }
+      }
     });
   }
 
-  openSetRoleDialog() {
-    this.dialog.open(SetRoleComponent, {
-      data: { userId: this.userId, role: this.user?.role.value }
+  openSetSubscriptionDialog() {
+    const dialog = this.dialog.open(SetSubscriptionComponent, {
+      data: { userId: this.userId, subscription: this.user?.subscription.value, expiredAt: this.user?.subscription.expiredAt }
+    });
+
+    let isSubscribtionChanged: boolean = false;
+    let selectedSubscription: string | undefined;
+
+    dialog.afterClosed().pipe(tap((data: SetSubscription) => {
+      isSubscribtionChanged = data !== undefined;
+      selectedSubscription = data?.subscription;
+    }), switchMap((data: SetSubscription) => {
+      if (data) {
+        return this.usersService.setSubscription(this.userId, data.subscription, data.expiredAt)
+      }
+      return of(null);
+    })).safeSubscribe(this, {
+      next: () => {
+        if (isSubscribtionChanged) {
+          this.notifyService.show(`User subscription changed on ${selectedSubscription}`);
+          this.getUserDetails();
+        }
+      }
     });
   }
 

@@ -12,15 +12,15 @@
         <mat-icon>edit</mat-icon>
         <span>Set Role</span>
       </button>
-      <button mat-raised-button color="primary" class="button block-button" (click)="revokeRefreshToken()">
+      <button mat-raised-button color="primary" class="button block-button" (click)="revokeUserRefreshToken()">
         <mat-icon>person_off</mat-icon>
         <span>Revoke token</span>
       </button>
-      <button *ngIf="user.isActive" mat-raised-button color="primary" class="button block-button" [disabled]="isCurrentUserAccount || !isSystemAdministrator" (click)="block()">
+      <button *ngIf="user.isActive" mat-raised-button color="primary" class="button block-button" [disabled]="isCurrentUserAccount || !isSystemAdministrator" (click)="blockUser()">
         <mat-icon>key_off</mat-icon>
         <span>Block</span>
       </button>
-      <button *ngIf="!user.isActive" mat-raised-button color="secondary" class="button" [disabled]="isCurrentUserAccount || !isSystemAdministrator" (click)="unblock()">
+      <button *ngIf="!user.isActive" mat-raised-button color="secondary" class="button" [disabled]="isCurrentUserAccount || !isSystemAdministrator" (click)="unblockUser()">
         <mat-icon>key_on</mat-icon>
         <span>Unblock</span>
       </button>

@@ -1,34 +1,36 @@
 import { Component, inject } from '@angular/core';
-import { UsersService } from '../../services/users.service';
-import { BaseComponent } from '../../../../shared/abstractions/base.component';
 import { SystemRole, systemRoles } from '../../../../core/enums/system-role.enum';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-set-role',
-  templateUrl: './set-role.component.html',
-  styleUrl: './set-role.component.scss'
+  template: `
+    <app-dialog-container title="Set system role" (save)="save()" (close)="close()">
+      <mat-form-field class="field">
+        <mat-label>Role</mat-label>
+        <mat-select [(value)]="selectedRole">
+          <mat-option *ngFor="let role of systemRoles" [value]="role">{{ role }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </app-dialog-container>
+  `,
+  styles: `
+    .field {
+      width: 400px;
+      margin-bottom: 10px;
+    }
+  `
 })
-export class SetRoleComponent extends BaseComponent {
+export class SetRoleComponent {
   private readonly dialogRef = inject(MatDialogRef<SetRoleComponent>);
   private readonly data = inject<{ userId: string, role: string }>(MAT_DIALOG_DATA);
-  private usersService = inject(UsersService);
   selectedRole: string;
   systemRoles: string[] = systemRoles;
 
   constructor() {
-    super();
     this.selectedRole = this.data.role;
   }
 
-  save() {
-    this.usersService.setRole(this.data.userId, this.selectedRole as SystemRole).safeSubscribe(this, {
-      next: () => {
-        this.notifyService.show(`User role changed on ${this.selectedRole}`);
-        this.close();
-      }
-    });
-  }
-
+  save = () => this.dialogRef.close(this.selectedRole as SystemRole);
   close = () => this.dialogRef.close();
 }

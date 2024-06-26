@@ -10,6 +10,8 @@ import { MaterialModule } from '../../shared/modules/material.module';
 import { PropertyGridModule } from '../../shared/components/property-grid/property-grid.module';
 import { SetSubscriptionComponent } from './components/set-subscription/set-subscription.component';
 import { SetRoleComponent } from './components/set-role/set-role.component';
+import { DialogContainerModule } from '../../shared/components/dialog-container/dialog-container.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -23,6 +25,8 @@ import { SetRoleComponent } from './components/set-role/set-role.component';
         MaterialModule,
         SpinnerModule,
         PropertyGridModule,
+        DialogContainerModule,
+        FormsModule,
         RouterModule.forChild([
             {
                 path: '',
