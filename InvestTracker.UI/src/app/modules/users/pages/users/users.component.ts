@@ -5,6 +5,8 @@ import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import { TableColumn } from '../../../../shared/models/table-column.interface';
 import { DateTimeService } from '../../../../shared/services/date-time.service';
+import { PagedRequest } from '../../../../core/models/paged-request.mode';
+import { PagedResponse } from '../../../../core/models/paged-response.model';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +14,7 @@ import { DateTimeService } from '../../../../shared/services/date-time.service';
   styleUrl: './users.component.scss'
 })
 export class UsersComponent extends BaseComponent implements OnInit {
-  users?: User[];
+  pagedResponse?: PagedResponse<User>;
   columns: TableColumn<User>[];
   displayedColumns: string[];
   usersService = inject(UsersService);
@@ -21,7 +23,6 @@ export class UsersComponent extends BaseComponent implements OnInit {
 
   constructor() {
     super();
-    this.users = [];
     this.columns = [
       { columnDef: 'id', header: 'Id', format: (element: User) => `${element.id}` },
       { columnDef: 'fullName', header: 'Full name', format: (element: User) => `${element.fullName}` },
@@ -36,14 +37,22 @@ export class UsersComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usersService.getUsers().safeSubscribe(this, {
-        next: (response: User[]) => {
-          this.users = response;
-        }
-    });
+    this.getUsers(PagedRequest.Default());
   }
 
   navigateToUserDetails(id: string) {
     this.router.navigate(['/users', id]);
+  }
+
+  onPageChanged(event: any) {
+    this.getUsers(event as PagedRequest);
+  }
+
+  private getUsers(request: PagedRequest) {
+    this.usersService.getUsers(request).safeSubscribe(this, {
+      next: (response: PagedResponse<User>) => {
+        this.pagedResponse = response;
+      }
+    });
   }
 }

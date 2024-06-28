@@ -46,15 +46,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     this.getUserDetails();
   }
 
-  getUserDetails() {
-    this.usersService.getUserDetails(this.userId).safeSubscribe(this, {
-      next: (response: UserDetails) => {
-        this.user = response;
-        this.setFields(this.user);
-      }
-    });
-  }
-
   blockUser() {
     this.usersService.deactivate(this.userId).safeSubscribe(this, {
       next: () => {
@@ -129,6 +120,15 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
           this.notifyService.show(`User subscription changed on ${selectedSubscription}`);
           this.getUserDetails();
         }
+      }
+    });
+  }
+
+  private getUserDetails() {
+    this.usersService.getUserDetails(this.userId).safeSubscribe(this, {
+      next: (response: UserDetails) => {
+        this.user = response;
+        this.setFields(this.user);
       }
     });
   }

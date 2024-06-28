@@ -12,6 +12,7 @@ import { SetSubscriptionComponent } from './components/set-subscription/set-subs
 import { SetRoleComponent } from './components/set-role/set-role.component';
 import { DialogContainerModule } from '../../shared/components/dialog-container/dialog-container.module';
 import { FormsModule } from '@angular/forms';
+import { PaginatorModule } from '../../shared/components/paginator/paginator.module';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
         PropertyGridModule,
         DialogContainerModule,
         FormsModule,
+        PaginatorModule,
         RouterModule.forChild([
             {
                 path: '',

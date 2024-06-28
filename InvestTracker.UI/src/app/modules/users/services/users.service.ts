@@ -6,6 +6,8 @@ import { UserDetails } from '../models/user-details.model';
 import { SystemRole } from '../../../core/enums/system-role.enum';
 import { SystemSubscription } from '../../../core/enums/system-subscription.enum';
 import { HttpService } from '../../../shared/services/http.service';
+import { PagedRequest } from '../../../core/models/paged-request.mode';
+import { PagedResponse } from '../../../core/models/paged-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,8 @@ export class UsersService {
     return this.httpService.get<UserDetails>(`${apiUrl.module.users}/users/${id}`);
   }
 
-  getUsers() : Observable<User[]> {
-    return this.httpService.get<User[]>(`${apiUrl.module.users}/users`);
+  getUsers(request: PagedRequest) : Observable<PagedResponse<User>> {
+    return this.httpService.get<PagedResponse<User>>(`${apiUrl.module.users}/users?page=${request.page}&results=${request.results}`);
   }
 
   setRole(userId: string, role: SystemRole) : Observable<void> {
