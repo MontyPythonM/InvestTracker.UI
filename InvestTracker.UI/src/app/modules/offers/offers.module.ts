@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { OffersComponent } from './pages/offers/offers.component';
 import { OfferComponent } from './pages/offer/offer.component';
 import { RouterModule } from "@angular/router";
+import { PaginatorModule } from '../../shared/components/paginator/paginator.module';
+import { SpinnerModule } from '../../shared/components/spinner/spinner.module';
+import { MaterialModule } from '../../shared/modules/material.module';
 
 @NgModule({
   declarations: [
@@ -11,21 +14,17 @@ import { RouterModule } from "@angular/router";
   ],
   imports: [
     CommonModule,
+    PaginatorModule,
+    SpinnerModule,
+    MaterialModule,
     RouterModule.forChild([
       {
         path: '',
-        component: OffersComponent,
-        children: [
-          {
-            path: '',
-            pathMatch: 'full',
-            redirectTo: 'offers'
-          },
-          {
-            path: 'offer',
-            component: OfferComponent,
-          }
-        ]
+        component: OffersComponent
+      },
+      {
+        path: 'offers/:id',
+        component: OfferComponent
       }
     ])
   ]

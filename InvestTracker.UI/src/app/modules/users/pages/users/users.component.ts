@@ -40,7 +40,7 @@ export class UsersComponent extends BaseComponent implements OnInit {
     this.getUsers(PagedRequest.Default());
   }
 
-  navigateToUserDetails(id: string) {
+  navigateToDetails(id: string) {
     this.router.navigate(['/users', id]);
   }
 

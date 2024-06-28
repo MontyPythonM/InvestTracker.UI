@@ -1,4 +1,12 @@
-<div>
-  <p>offers works!</p>
-  <router-outlet></router-outlet>
+<div class="container" *ngIf="pagedResponse?.items">
+  <mat-table [dataSource]="pagedResponse!.items" class="table">
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+      <mat-header-cell *matHeaderCellDef>{{ column.header }}</mat-header-cell>
+      <mat-cell *matCellDef="let row" [innerHtml]="column.format(row)"></mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToDetails(row.id)"></mat-row>
+  </mat-table>
+  <app-paginator [pagedResponse]="pagedResponse" (pageChanged)="onPageChanged($event)"></app-paginator>
 </div>
+<app-spinner [isVisible]="!pagedResponse?.items?.length"></app-spinner>

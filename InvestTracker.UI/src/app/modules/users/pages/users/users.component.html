@@ -5,7 +5,7 @@
       <mat-cell *matCellDef="let row" [innerHtml]="column.format(row)"></mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToUserDetails(row.id)"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToDetails(row.id)"></mat-row>
   </mat-table>
   <app-paginator [pagedResponse]="pagedResponse" (pageChanged)="onPageChanged($event)"></app-paginator>
 </div>
