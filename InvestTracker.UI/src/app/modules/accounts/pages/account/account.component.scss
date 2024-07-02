@@ -11,7 +11,7 @@
 
 .delete-button {
   background-color: darkred;
-  margin-top: 10px;
+  margin-top: 5px;
   min-width: 212px;
   padding: 20px 0 20px 0;
 }
@@ -29,4 +29,17 @@
 
 .delete-description {
   margin: 20px 0px 20px 0px;
+}
+
+.section-button {
+  margin: 0px 10px 10px;
+  width: 36px;
+  height: 36px;
+}
+
+.edit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

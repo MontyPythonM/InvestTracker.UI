@@ -1,4 +1,4 @@
-import { AdvisorDetails } from "./advisor-details.model";
+import { AdvisorDetails } from "../../../core/models/advisor-details.model";
 
 export class OfferDetails {
   id: string;

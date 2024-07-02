@@ -22,5 +22,5 @@ import { Component, Input } from '@angular/core';
   `
 })
 export class SpinnerComponent {
-  @Input() isVisible: boolean = false;
+  @Input({ required: true }) isVisible!: boolean;
 }

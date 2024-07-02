@@ -1,1 +1,29 @@
-<p>offer works!</p>
+<div *ngIf="offerDetails" class="container">
+  <div class="buttons-bar">
+    <button mat-mini-fab color="secondary" routerLink="/offers">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div>
+      <button mat-raised-button *ngIf="isLoggedInUser" color="primary" class="button" (click)="openUpdateOfferDialog()">
+        <mat-icon>business_center</mat-icon>
+        <span>Invite to collaboration</span>
+      </button>
+      <button mat-raised-button *ngIf="isAdministrator || isOfferOwner" color="primary" class="button" (click)="openUpdateOfferDialog()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button mat-raised-button *ngIf="isAdministrator || isOfferOwner" color="primary" class="button delete-button" (click)="openDeleteOfferDialog()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </div>
+  </div>
+  <div class="section">
+    <h1 class="title">Offer</h1>
+    <app-property-grid [fields]="offerDetailsFields"></app-property-grid>
+  </div>
+  <div class="section">
+    <h1 class="title">Advisor</h1>
+    <app-property-grid [fields]="advisorDetailsFields"></app-property-grid>
+  </div>
+</div>

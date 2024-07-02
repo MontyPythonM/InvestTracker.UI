@@ -11,7 +11,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       <ng-content></ng-content>
         <div class="buttons">
           <button mat-raised-button class="close-button" (click)="close.emit()" color="secondary">Close</button>
-          <button mat-raised-button class="submit-button" (click)="save.emit()" color="primary" >Save</button>
+          <button mat-raised-button class="submit-button" (click)="save.emit()" color="primary" [disabled]="disableSaveButton">Save</button>
         </div>
     </div>
   `,
@@ -19,6 +19,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class DialogContainerComponent {
   @Input() title: string = '';
+  @Input() disableSaveButton: boolean = false;
   @Output() save = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
 }

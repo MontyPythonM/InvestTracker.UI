@@ -6,6 +6,7 @@ import { RouterModule } from "@angular/router";
 import { PaginatorModule } from '../../shared/components/paginator/paginator.module';
 import { SpinnerModule } from '../../shared/components/spinner/spinner.module';
 import { MaterialModule } from '../../shared/modules/material.module';
+import { PropertyGridModule } from '../../shared/components/property-grid/property-grid.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MaterialModule } from '../../shared/modules/material.module';
     PaginatorModule,
     SpinnerModule,
     MaterialModule,
+    PropertyGridModule,
     RouterModule.forChild([
       {
         path: '',

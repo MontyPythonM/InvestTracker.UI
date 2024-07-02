@@ -14,6 +14,11 @@ import { SubscriptionChangeSource } from '../../enums/change-source.enum';
 import { SystemRole } from '../../../../core/enums/system-role.enum';
 import { SetSubscription } from '../../models/set-subscription.model';
 import { of, switchMap, tap } from 'rxjs';
+import { AdvisorsService } from '../../../../core/services/advisors.service';
+import { AdvisorDetails } from '../../../../core/models/advisor-details.model';
+import { SystemSubscription, systemSubscriptions } from '../../../../core/enums/system-subscription.enum';
+import { UpdateAdvisor } from '../../../../core/models/update-advisor.model';
+import { UpdateAdvisorComponent } from '../../../../core/components/update-advisor/update-advisor.component';
 
 @Component({
   selector: 'app-user-details',
@@ -21,6 +26,12 @@ import { of, switchMap, tap } from 'rxjs';
   styleUrl: './user-details.component.scss'
 })
 export class UserDetailsComponent extends BaseComponent implements OnInit {
+  private usersService = inject(UsersService);
+  private route = inject(ActivatedRoute);
+  private dialog = inject(MatDialog);
+  private dateTimeService = inject(DateTimeService);
+  private subscriptionChangeSource = enumToObjects(SubscriptionChangeSource);
+  private advisorsService = inject(AdvisorsService);
   user?: UserDetails;
   userId: string;
   accountFields: PropertyField[] = [];
@@ -29,16 +40,13 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
   isCurrentUserAccount: boolean;
   isSystemAdministrator: boolean;
   setRoleDialog?: MatDialogRef<SetRoleComponent, any>;
-  private usersService = inject(UsersService);
-  private route = inject(ActivatedRoute);
-  private dialog = inject(MatDialog);
-  private dateTimeService = inject(DateTimeService);
-  private subscriptionChangeSource = enumToObjects(SubscriptionChangeSource);
+  advisorFields: PropertyField[] = [];
+  advisor?: AdvisorDetails;
 
   constructor() {
     super();
     this.userId = this.route.snapshot.params['id'];
-    this.isCurrentUserAccount = this.authenticationService.getDecodedToken()?.sub === this.userId;
+    this.isCurrentUserAccount = this.getCurrentUserId() === this.userId;
     this.isSystemAdministrator = this.isAccessibleFor(Access.SystemAdministrators);
   }
 
@@ -124,16 +132,72 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     });
   }
 
-  private getUserDetails() {
-    this.usersService.getUserDetails(this.userId).safeSubscribe(this, {
-      next: (response: UserDetails) => {
-        this.user = response;
-        this.setFields(this.user);
+  openUpdateAdvisorDialog() {
+    if (this.user?.subscription.value !== SystemSubscription.Advisor && !this.isSystemAdministrator) {
+      return;
+    }
+
+    const dialog = this.dialog.open(UpdateAdvisorComponent, {
+      data: { model: this.advisor }
+    });
+
+    let isAdvisorDataChanged: boolean = false;
+    let advisorId: string | undefined;
+
+    dialog.afterClosed().pipe(tap((data: UpdateAdvisor) => {
+      isAdvisorDataChanged = data !== undefined;
+      advisorId = data?.id;
+    }), switchMap((data: UpdateAdvisor) => {
+      if (data) {
+        return this.advisorsService.upadte(data);
+      }
+      return of(null);
+    })).safeSubscribe(this, {
+      next: () => {
+        if (isAdvisorDataChanged) {
+          this.notifyService.show('Advisor updated');
+          this.getAdvisor(advisorId!);
+        }
       }
     });
   }
 
-  private setFields(user: UserDetails) {
+  private getUserDetails() {
+    this.usersService.getUserDetails(this.userId).safeSubscribe(this, {
+      next: (response: UserDetails) => {
+        this.user = response;
+        this.setUserFields(this.user);
+
+        if (this.user.subscription.value === SystemSubscription.Advisor) {
+          this.getAdvisor(this.user.id);
+        }
+        else {
+          this.advisor = undefined
+        }
+      }
+    });
+  }
+
+  private getAdvisor(advisorId: string) {
+    this.advisorsService.get(advisorId).safeSubscribe(this, {
+      next: (result) => {
+        this.advisor = result;
+        this.setAdvisorFields(result);
+      }
+    });
+  }
+
+  private setAdvisorFields(advisor: AdvisorDetails) {
+    this.advisorFields = [
+      { name: 'Full name', value: advisor.fullName },
+      { name: 'Email', value: advisor.email },
+      { name: 'Phone', value: advisor.phoneNumber },
+      { name: 'Biography', value: advisor.bio },
+      { name: 'Company', value: advisor.companyName },
+    ];
+  }
+
+  private setUserFields(user: UserDetails) {
     this.accountFields = [
       { name: 'ID', value: user.id },
       { name: 'Full name', value: user.fullName },

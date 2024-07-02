@@ -22,12 +22,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { DatePipe } from '@angular/common';
 import { ErrorHandlerInterceptor } from './core/interceptors/error-handler.interceptor';
+import { UpdateAdvisorComponent } from './core/components/update-advisor/update-advisor.component';
+import { DialogContainerModule } from './shared/components/dialog-container/dialog-container.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationSectionComponent,
-    HeaderSectionComponent
+    HeaderSectionComponent,
+    UpdateAdvisorComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +48,8 @@ import { ErrorHandlerInterceptor } from './core/interceptors/error-handler.inter
     HomeModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DialogContainerModule
   ],
   providers: [
     DatePipe,

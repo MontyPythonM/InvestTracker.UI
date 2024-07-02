@@ -28,3 +28,16 @@
 .block-button {
   background-color: darkred;
 }
+
+.section-button {
+  margin: 0px 10px 10px;
+  width: 36px;
+  height: 36px;
+}
+
+.edit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -4,14 +4,6 @@
       <mat-icon>arrow_back</mat-icon>
     </button>
     <div>
-      <button mat-raised-button color="primary" class="button" (click)="openSetSubscriptionDialog()">
-        <mat-icon>edit</mat-icon>
-        <span>Set Subscription</span>
-      </button>
-      <button mat-raised-button color="primary" class="button" [disabled]="!isSystemAdministrator" (click)="openSetRoleDialog()">
-        <mat-icon>edit</mat-icon>
-        <span>Set Role</span>
-      </button>
       <button mat-raised-button color="primary" class="button block-button" (click)="revokeUserRefreshToken()">
         <mat-icon>person_off</mat-icon>
         <span>Revoke token</span>
@@ -31,13 +23,31 @@
     <app-property-grid [fields]="accountFields"></app-property-grid>
   </div>
   <div class="section">
-    <h1 class="title">Role</h1>
+    <h1 class="title edit">
+      Role
+      <button mat-mini-fab color="primary" class="section-button" [disabled]="!isSystemAdministrator" (click)="openSetRoleDialog()">
+        <mat-icon>edit</mat-icon>
+      </button>
+  </h1>
     <app-property-grid [fields]="roleFields"></app-property-grid>
   </div>
   <div class="section">
-    <h1 class="title">Subscription</h1>
+    <h1 class="title edit">
+      Subscription
+      <button mat-mini-fab color="primary" class="section-button" (click)="openSetSubscriptionDialog()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </h1>
     <app-property-grid [fields]="subscriptionFields"></app-property-grid>
+  </div>
+  <div class="section" *ngIf="advisor">
+    <h1 class="title edit">
+      Advisor profile
+      <button mat-mini-fab color="primary" class="section-button" (click)="openUpdateAdvisorDialog()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </h1>
+    <app-property-grid [fields]="advisorFields"></app-property-grid>
   </div>
 </div>
 <app-spinner [isVisible]="!user"></app-spinner>
-

@@ -25,6 +25,8 @@ export abstract class BaseComponent implements OnDestroy {
 
   protected isAuthenticated = () => this.authenticationService.hasValidToken();
 
+  protected getCurrentUserId = () => this.authenticationService.getDecodedToken()?.sub;
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

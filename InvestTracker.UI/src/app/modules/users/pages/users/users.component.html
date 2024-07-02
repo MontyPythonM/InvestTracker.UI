@@ -1,4 +1,5 @@
 <div class="container" *ngIf="pagedResponse?.items">
+  <h1>Users</h1>
   <mat-table [dataSource]="pagedResponse!.items" class="table">
     <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
       <mat-header-cell *matHeaderCellDef>{{ column.header }}</mat-header-cell>
