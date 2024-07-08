@@ -7,23 +7,5 @@ The application allows you to enter selected financial assets and track changes 
 ## Status
 Project status: **Work in progress**
 
-Features:
-- common:
-  - light/dark mode
-  - roll-up navigation side panel
-  - authorization guard based on user subscription and role
-
-- account:
-  - login
-  - logout
-  - register
-  - forgot password
-  - reset password
-  - refresh token (invoked automatically when user JWT expired)
-
-- users
-  - get current user details
-  - delete own account
-
 ## How to start the solution
 Type terminal command `ng serve` to run application on localhost:4200.
