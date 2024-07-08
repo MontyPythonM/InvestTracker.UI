@@ -7,11 +7,16 @@ import { PaginatorModule } from '../../shared/components/paginator/paginator.mod
 import { SpinnerModule } from '../../shared/components/spinner/spinner.module';
 import { MaterialModule } from '../../shared/modules/material.module';
 import { PropertyGridModule } from '../../shared/components/property-grid/property-grid.module';
+import { AddOfferComponent } from './components/add-offer/add-offer.component';
+import { DialogContainerModule } from '../../shared/components/dialog-container/dialog-container.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
     OffersComponent,
-    OfferComponent
+    OfferComponent,
+    AddOfferComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +24,9 @@ import { PropertyGridModule } from '../../shared/components/property-grid/proper
     SpinnerModule,
     MaterialModule,
     PropertyGridModule,
+    DialogContainerModule,
+    ReactiveFormsModule,
+    MatChipsModule,
     RouterModule.forChild([
       {
         path: '',

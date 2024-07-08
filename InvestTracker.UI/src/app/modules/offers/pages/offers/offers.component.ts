@@ -6,6 +6,11 @@ import { Offer } from '../../models/offer.model';
 import { PagedResponse } from '../../../../core/models/paged-response.model';
 import { BaseComponent } from '../../../../shared/abstractions/base.component';
 import { PagedRequest } from '../../../../core/models/paged-request.mode';
+import { Access } from '../../../../core/enums/access.enum';
+import { MatDialog } from '@angular/material/dialog';
+import { AddOfferComponent } from '../../components/add-offer/add-offer.component';
+import { of, switchMap } from 'rxjs';
+import { CreateOffer } from '../../models/create-offer.model';
 
 @Component({
   selector: 'app-offers',
@@ -13,11 +18,15 @@ import { PagedRequest } from '../../../../core/models/paged-request.mode';
   styleUrl: './offers.component.scss'
 })
 export class OffersComponent extends BaseComponent implements OnInit {
+  private usersService = inject(OffersService);
+  private router = inject(Router);
+  private dialog = inject(MatDialog);
+  private offersService = inject(OffersService);
   pagedResponse?: PagedResponse<Offer>;
   columns: TableColumn<Offer>[];
   displayedColumns: string[];
-  usersService = inject(OffersService);
-  router = inject(Router);
+  canAddOffer: boolean = false;
+  private pagedRequest: PagedRequest;
 
   constructor() {
     super();
@@ -28,10 +37,12 @@ export class OffersComponent extends BaseComponent implements OnInit {
       { columnDef: 'advisorFullName', header: 'Advisor', format: (element: Offer) => `${element.advisorFullName}` },
     ];
     this.displayedColumns = this.columns.map(c => c.columnDef);
+    this.canAddOffer = this.isAccessibleFor(Access.Advisors);
+    this.pagedRequest = PagedRequest.Default();
   }
 
   ngOnInit(): void {
-    this.getOffers(PagedRequest.Default());
+    this.getOffers(this.pagedRequest);
   }
 
   navigateToDetails(id: string) {
@@ -39,7 +50,30 @@ export class OffersComponent extends BaseComponent implements OnInit {
   }
 
   onPageChanged(event: any) {
-    this.getOffers(event as PagedRequest);
+    this.pagedRequest = event as PagedRequest;
+    this.getOffers(this.pagedRequest);
+  }
+
+  openAddOfferDialog() {
+    const dialog = this.dialog.open(AddOfferComponent, {
+      data: { }
+    });
+
+    let offerAdded: boolean = false;
+    dialog.afterClosed().pipe(switchMap((model: CreateOffer) => {
+      if (model) {
+        offerAdded = true;
+        return this.offersService.createOffer(model);
+      }
+      return of(null);
+    })).safeSubscribe(this, {
+      next: () => {
+        if (offerAdded) {
+          this.notifyService.show(`Offer created`);
+          this.getOffers(this.pagedRequest);
+        }
+      }
+    });
   }
 
   private getOffers(request: PagedRequest) {

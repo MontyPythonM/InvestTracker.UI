@@ -4,7 +4,7 @@ import { UsersService } from '../../services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserDetails } from '../../models/user-details.model';
 import { PropertyField } from '../../../../shared/models/property-field.model';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DateTimeService } from '../../../../shared/services/date-time.service';
 import { SetSubscriptionComponent } from '../../components/set-subscription/set-subscription.component';
 import { SetRoleComponent } from '../../components/set-role/set-role.component';
@@ -16,7 +16,7 @@ import { SetSubscription } from '../../models/set-subscription.model';
 import { of, switchMap, tap } from 'rxjs';
 import { AdvisorsService } from '../../../../core/services/advisors.service';
 import { AdvisorDetails } from '../../../../core/models/advisor-details.model';
-import { SystemSubscription, systemSubscriptions } from '../../../../core/enums/system-subscription.enum';
+import { SystemSubscription } from '../../../../core/enums/system-subscription.enum';
 import { UpdateAdvisor } from '../../../../core/models/update-advisor.model';
 import { UpdateAdvisorComponent } from '../../../../core/components/update-advisor/update-advisor.component';
 
@@ -39,7 +39,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
   subscriptionFields: PropertyField[] = [];
   isCurrentUserAccount: boolean;
   isSystemAdministrator: boolean;
-  setRoleDialog?: MatDialogRef<SetRoleComponent, any>;
   advisorFields: PropertyField[] = [];
   advisor?: AdvisorDetails;
 
@@ -81,9 +80,9 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
   }
 
   openSetRoleDialog() {
-    const dialog = this.setRoleDialog = this.dialog.open(SetRoleComponent, {
+    const dialog = this.dialog.open(SetRoleComponent, {
       data: { userId: this.userId, role: this.user?.role.value }
-    })
+    });
 
     let isRoleChanged: boolean = false;
     let selectedRole: SystemRole | undefined;

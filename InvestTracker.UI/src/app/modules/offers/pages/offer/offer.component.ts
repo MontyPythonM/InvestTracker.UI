@@ -79,7 +79,7 @@ export class OfferComponent extends BaseComponent implements OnInit {
       { name: 'ID', value: offer.id },
       { name: 'Full name', value: offer.title },
       { name: 'Email', value: offer.description ?? "" },
-      { name: 'Price', value: offer.price!.toString() ?? "" },
+      { name: 'Price', value: offer.price?.toString() ?? "" },
       { name: 'Created at', value: this.dateTimeService.formatDateTime(offer.createdAt) },
       { name: 'Updated at', value: this.dateTimeService.formatDateTime(offer.updatedAt) },
     ];

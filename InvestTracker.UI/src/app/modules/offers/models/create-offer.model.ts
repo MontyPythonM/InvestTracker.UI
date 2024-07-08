@@ -1,13 +1,13 @@
 export class CreateOffer {
   title: string;
   description: string;
-  price: number;
+  price?: string;
   tags: string[];
 
-  constructor(title: string, description: string, price: number, tags: string[]) {
+  constructor(title: string, description: string, tags: string[], price?: number) {
     this.title = title;
     this.description = description;
-    this.price = price;
+    this.price = price?.toString() ?? undefined;
     this.tags = tags;
   }
 }

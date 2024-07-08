@@ -1,13 +1,24 @@
 <div class="container" *ngIf="pagedResponse?.items">
   <h1>Offers</h1>
-  <mat-table [dataSource]="pagedResponse!.items" class="table">
-    <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-      <mat-header-cell *matHeaderCellDef>{{ column.header }}</mat-header-cell>
-      <mat-cell *matCellDef="let row" [innerHtml]="column.format(row)"></mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToDetails(row.id)"></mat-row>
-  </mat-table>
-  <app-paginator [pagedResponse]="pagedResponse" (pageChanged)="onPageChanged($event)"></app-paginator>
+  <div class="buttons">
+    <button mat-raised-button *ngIf="canAddOffer" color="primary" class="button" (click)="openAddOfferDialog()">
+      <mat-icon>business_center</mat-icon>
+      <span>Add offer</span>
+    </button>
+  </div>
+  <div *ngIf="pagedResponse?.totalResults === 0" class="info">
+    <h2>No offers added</h2>
+  </div>
+  <div *ngIf="pagedResponse?.totalResults !== 0">
+    <mat-table [dataSource]="pagedResponse!.items" class="table">
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+        <mat-header-cell *matHeaderCellDef>{{ column.header }}</mat-header-cell>
+        <mat-cell *matCellDef="let row" [innerHtml]="column.format(row)"></mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToDetails(row.id)"></mat-row>
+    </mat-table>
+    <app-paginator [pagedResponse]="pagedResponse" (pageChanged)="onPageChanged($event)"></app-paginator>
+  </div>
 </div>
-<app-spinner [isVisible]="!pagedResponse?.items?.length"></app-spinner>
+<app-spinner [isVisible]="pagedResponse === undefined"></app-spinner>

@@ -9,29 +9,27 @@ import { PHONE_REGEX } from '../../constants';
   selector: 'app-update-advisor',
   template: `
     <app-dialog-container title="Update advisor profile" [disableSaveButton]="!this.form.valid" (save)="save()" (close)="close()">
-      <form [formGroup]="form" (ngSubmit)="save()">
-        <div class="form">
-          <mat-form-field class="field">
-            <input matInput formControlName="phoneNumber">
-            <mat-label>Phone</mat-label>
-            <mat-error *ngIf="phoneNumber?.hasError('required')">Phone number is required</mat-error>
-            <mat-error *ngIf="phoneNumber?.hasError('pattern')">Phone number has wrong format</mat-error>
-          </mat-form-field>
-          <mat-form-field class="field">
-            <input matInput formControlName="bio">
-            <mat-label>Biography</mat-label>
-          </mat-form-field>
-          <mat-form-field class="field">
-            <input matInput formControlName="companyName">
-            <mat-label>Company</mat-label>
-          </mat-form-field>
-          <mat-form-field class="field">
-            <input matInput formControlName="avatar">
-            <mat-label>Avatar</mat-label>
-          </mat-form-field>
-        </div>
+      <form class="form" [formGroup]="form">
+        <mat-form-field class="field">
+          <input matInput formControlName="phoneNumber">
+          <mat-label>Phone</mat-label>
+          <mat-error *ngIf="phoneNumber?.hasError('required')">Phone number is required</mat-error>
+          <mat-error *ngIf="phoneNumber?.hasError('pattern')">Phone number has wrong format</mat-error>
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput formControlName="bio">
+          <mat-label>Biography</mat-label>
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput formControlName="companyName">
+          <mat-label>Company</mat-label>
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput formControlName="avatar">
+          <mat-label>Avatar</mat-label>
+        </mat-form-field>
       </form>
-      <img class="avatar" [src]="'data:image/jpeg;base64,'+ data.model.avatar"/>
+      <img *ngIf="data.model.avatar" class="avatar" [src]="'data:image/jpeg;base64,'+ data.model.avatar"/>
     </app-dialog-container>
   `,
   styles: [`

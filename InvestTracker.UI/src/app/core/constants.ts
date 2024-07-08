@@ -8,6 +8,7 @@ export const ACCESS_TOKEN_KEY = 'access-token';
 export const PHONE_REGEX = /^\+?(\d{1,3})?[-. ]?(\(?\d{1,4}\)?[-. ]?)?(\d{1,4}[-. ]?){1,3}\d{1,4}$/;
 export const DATETIME_FORMAT = 'dd/MM/yyyy HH:mm:ss';
 export const DATE_FORMAT = 'dd/MM/yyyy';
+export const DECIMAL_REGEX = /^\d*\.?\d*$/;
 
 export const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
