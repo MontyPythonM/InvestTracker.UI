@@ -11,12 +11,15 @@ import { AddOfferComponent } from './components/add-offer/add-offer.component';
 import { DialogContainerModule } from '../../shared/components/dialog-container/dialog-container.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
+import { EditOfferComponent } from './components/edit-offer/edit-offer.component';
+import { ConfirmationDialogModule } from '../../shared/components/confirmation-dialog/confirmation-dialog.module';
 
 @NgModule({
   declarations: [
     OffersComponent,
     OfferComponent,
-    AddOfferComponent
+    AddOfferComponent,
+    EditOfferComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +30,7 @@ import { MatChipsModule } from '@angular/material/chips';
     DialogContainerModule,
     ReactiveFormsModule,
     MatChipsModule,
+    ConfirmationDialogModule,
     RouterModule.forChild([
       {
         path: '',

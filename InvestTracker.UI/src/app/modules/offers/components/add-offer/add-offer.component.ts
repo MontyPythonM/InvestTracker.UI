@@ -22,12 +22,12 @@ import { DECIMAL_REGEX } from '../../../../core/constants';
       <mat-form-field class="field">
         <input matInput formControlName="price">
         <mat-label>Price</mat-label>
-        <mat-error *ngIf="title?.hasError('required')">Must be positive number</mat-error>
+        <mat-error *ngIf="title?.hasError('pattern')">Must be positive number</mat-error>
       </mat-form-field>
       <mat-form-field class="field">
         <mat-label>Tags</mat-label>
         <mat-chip-grid #chipGrid>
-          <mat-chip-row *ngFor="let tag of tags(); track tag" (removed)="removeTag(tag)">
+          <mat-chip-row *ngFor="let tag of tags();" (removed)="removeTag(tag)">
             {{ tag }}
             <button matChipRemove>
               <mat-icon>cancel</mat-icon>
@@ -48,10 +48,8 @@ import { DECIMAL_REGEX } from '../../../../core/constants';
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: top;
     }
-  `],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  `]
 })
 export class AddOfferComponent {
   private readonly dialogRef = inject(MatDialogRef<AddOfferComponent>);
@@ -95,8 +93,8 @@ export class AddOfferComponent {
     }
 
     const offer = this.price?.value
-      ? new CreateOffer(this.title?.value,this.description.value,this.tags(), this.price?.value)
-      : new CreateOffer(this.title?.value,this.description.value,this.tags())
+      ? new CreateOffer(this.title?.value, this.description.value, this.tags(), this.price?.value)
+      : new CreateOffer(this.title?.value, this.description.value, this.tags())
 
     this.dialogRef.close(offer);
   }

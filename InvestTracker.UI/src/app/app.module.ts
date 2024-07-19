@@ -30,7 +30,7 @@ import { DialogContainerModule } from './shared/components/dialog-container/dial
     AppComponent,
     NavigationSectionComponent,
     HeaderSectionComponent,
-    UpdateAdvisorComponent
+    UpdateAdvisorComponent,
   ],
   imports: [
     CommonModule,

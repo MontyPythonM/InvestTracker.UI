@@ -25,7 +25,8 @@ export class AccessService {
       [Access.ProfessionalInvestors]: () => subscription === SystemSubscription.ProfessionalInvestor,
       [Access.Advisors]: () => subscription === SystemSubscription.Advisor,
       [Access.Investors]: () => subscription === SystemSubscription.StandardInvestor || subscription === SystemSubscription.ProfessionalInvestor,
-      [Access.Subscribers]: () => subscription === SystemSubscription.StandardInvestor || subscription === SystemSubscription.ProfessionalInvestor || subscription === SystemSubscription.Advisor
+      [Access.Subscribers]: () => subscription === SystemSubscription.StandardInvestor || subscription === SystemSubscription.ProfessionalInvestor || subscription === SystemSubscription.Advisor,
+      [Access.AdministratorsAndAdvisors]: () => role === SystemRole.SystemAdministrator || role === SystemRole.BusinessAdministrator || subscription === SystemSubscription.Advisor
     };
 
     return accessConditions[access] ? accessConditions[access]() : false;

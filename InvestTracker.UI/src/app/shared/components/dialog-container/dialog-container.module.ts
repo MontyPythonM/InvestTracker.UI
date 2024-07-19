@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
   ],
   exports: [
-    DialogContainerComponent,
+    DialogContainerComponent
   ]
 })
 export class DialogContainerModule { }

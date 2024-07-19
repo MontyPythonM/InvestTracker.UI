@@ -2,14 +2,14 @@ export class UpdateOffer {
   id: string;
   title: string;
   description: string;
-  price: number;
+  price?: string;
   tags: string[];
 
-  constructor(id: string, title: string, description: string, price: number, tags: string[]) {
+  constructor(id: string, title: string, description: string, tags: string[], price?: number) {
     this.id = id;
     this.title = title;
     this.description = description;
-    this.price = price;
+    this.price = price?.toString() ?? undefined;
     this.tags = tags;
   }
 }

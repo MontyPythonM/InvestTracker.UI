@@ -11,4 +11,5 @@ export enum Access {
   SystemAdministrators,
   Administrators,
   Everyone,
+  AdministratorsAndAdvisors
 }
