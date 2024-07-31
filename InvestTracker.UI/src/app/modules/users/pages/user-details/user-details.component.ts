@@ -56,7 +56,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
   blockUser() {
     this.usersService.deactivate(this.userId).safeSubscribe(this, {
       next: () => {
-        this.notifyService.show(`${this.user?.fullName} account deactivated`);
         this.getUserDetails();
       }
     })
@@ -65,18 +64,13 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
   unblockUser() {
     this.usersService.activate(this.userId).safeSubscribe(this, {
       next: () => {
-        this.notifyService.show(`${this.user?.fullName} account activated`);
         this.getUserDetails();
       }
     })
   }
 
   revokeUserRefreshToken() {
-    this.authenticationService.revokeToken(this.userId).safeSubscribe(this, {
-      next: () => {
-        this.notifyService.show('User refresh token revoked')
-      }
-    })
+    this.authenticationService.revokeToken(this.userId).safeSubscribe(this, {});
   }
 
   openSetRoleDialog() {
@@ -98,7 +92,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     })).safeSubscribe(this, {
       next: () => {
         if (isRoleChanged) {
-          this.notifyService.show(`User subscription changed on ${selectedRole}`);
           this.getUserDetails();
         }
       }
@@ -110,11 +103,11 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
       data: { userId: this.userId, subscription: this.user?.subscription.value, expiredAt: this.user?.subscription.expiredAt }
     });
 
-    let isSubscribtionChanged: boolean = false;
+    let isSubscriptionChanged: boolean = false;
     let selectedSubscription: string | undefined;
 
     dialog.afterClosed().pipe(tap((data: SetSubscription) => {
-      isSubscribtionChanged = data !== undefined;
+      isSubscriptionChanged = data !== undefined;
       selectedSubscription = data?.subscription;
     }), switchMap((data: SetSubscription) => {
       if (data) {
@@ -123,8 +116,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
       return of(null);
     })).safeSubscribe(this, {
       next: () => {
-        if (isSubscribtionChanged) {
-          this.notifyService.show(`User subscription changed on ${selectedSubscription}`);
+        if (isSubscriptionChanged) {
           this.getUserDetails();
         }
       }

@@ -30,7 +30,6 @@ export class ForgotPasswordComponent extends BaseComponent {
     this.accountService.forgotPassword(this.email?.value).safeSubscribe(this, {
       next: () => {
         this.emailSent = true;
-        this.notifyService.show("Email was sent with a link to reset your password. Check your inbox");
       }
     });
   }

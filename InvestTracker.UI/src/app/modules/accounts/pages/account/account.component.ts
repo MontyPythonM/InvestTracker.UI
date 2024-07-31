@@ -49,7 +49,6 @@ export class AccountComponent extends BaseComponent implements OnInit {
     }
     this.accountService.deleteAccount(this.password.value).safeSubscribe(this, {
       next: () => {
-        this.notifyService.show("Account has been permanently deleted");
         this.authenticationService.clearToken();
         this.router.navigateByUrl('/home');
       }

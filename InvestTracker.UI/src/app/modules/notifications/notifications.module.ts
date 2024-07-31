@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { RouterModule } from '@angular/router';
+import { NotificationSettingsComponent } from './pages/notification-settings/notification-settings.component';
 
 @NgModule({
   declarations: [
-    NotificationsComponent
+    NotificationSettingsComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {
         path: '',
-        component: NotificationsComponent,
+        component: NotificationSettingsComponent,
         children: [
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'notifications'
+            redirectTo: 'notification-settings'
           }
         ]
       }
