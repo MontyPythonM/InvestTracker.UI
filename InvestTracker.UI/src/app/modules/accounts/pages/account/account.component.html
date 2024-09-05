@@ -1,19 +1,19 @@
 <div class="container" *ngIf="user">
   <div class="section">
-    <h1 class="title">Account details</h1>
+    <h2 class="title">Account details</h2>
     <app-property-grid [fields]="accountFields"></app-property-grid>
   </div>
   <div class="section" *ngIf="advisor">
-    <h1 class="title edit">
+    <h2 class="title edit">
       Advisor profile details
       <button mat-mini-fab color="primary" class="section-button" (click)="openUpdateAdvisorDialog()">
         <mat-icon>edit</mat-icon>
       </button>
-    </h1>
+    </h2>
     <app-property-grid  [fields]="advisorFields"></app-property-grid>
   </div>
   <div class="section">
-    <h1 class="title">Delete account</h1>
+    <h2 class="title">Delete account</h2>
     <div class="delete-description">Once you delete your account, there is no going back. Please be certain.</div>
     <form class="form" [formGroup]="deleteAccountForm" (ngSubmit)="deleteAccount()" novalidate>
       <mat-form-field class="password-field">

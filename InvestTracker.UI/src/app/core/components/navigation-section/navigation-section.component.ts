@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { SectionModel } from '../../../core/models/section.model';
+import { SectionModel } from '../../models/section.model';
 import { Router } from '@angular/router';
 import { Access } from '../../enums/access.enum';
 import { BaseComponent } from '../../../shared/abstractions/base.component';

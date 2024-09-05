@@ -9,7 +9,7 @@ import {UpdateOffer} from "../../models/update-offer.model";
 @Component({
   selector: 'app-edit-offer',
   template: `
-    <app-dialog-container title="Add offer" [disableSaveButton]="!this.form.valid" (save)="save()" (close)="close()">
+    <app-dialog-container title="Edit offer" [disableSaveButton]="!this.form.valid" (save)="save()" (close)="close()">
       <form class="form" [formGroup]="form">
         <mat-form-field class="field">
           <input matInput formControlName="title">

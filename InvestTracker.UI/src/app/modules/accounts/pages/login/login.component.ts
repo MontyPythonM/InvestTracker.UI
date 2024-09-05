@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AccountService } from '../../services/account.service';
-import { LoginForm } from '../../models/login-form.model';
-import { AccessToken } from '../../../../core/models/access-token.model';
-import { Router } from '@angular/router';
-import { BaseComponent } from '../../../../shared/abstractions/base.component';
+import {Component, inject} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AccountService} from '../../services/account.service';
+import {LoginForm} from '../../models/login-form.model';
+import {AccessToken} from '../../../../core/models/access-token.model';
+import {Router} from '@angular/router';
+import {BaseComponent} from '../../../../shared/abstractions/base.component';
+import {SignalrService} from "../../../../core/services/signalr.service";
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent extends BaseComponent {
   accountService = inject(AccountService);
   router = inject(Router);
   loginForm: FormGroup;
+  private signalrService = inject(SignalrService);
 
   constructor() {
     super();
@@ -35,8 +37,9 @@ export class LoginComponent extends BaseComponent {
     this.accountService.login(loginFormModel).safeSubscribe(this, {
       next: (response: AccessToken) => {
         this.authenticationService.setToken(response.token);
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl!('/');
         this.notifyService.show("Successfully logged in");
+        this.connectSignalR();
       }
     });
   }
@@ -47,5 +50,15 @@ export class LoginComponent extends BaseComponent {
 
   protected get password() {
     return this.loginForm.get('password')!;
+  }
+
+  private connectSignalR() {
+    this.signalrService.buildConnection();
+    this.signalrService.startConnection().subscribe(() => {
+      this.signalrService.receiveMessage().subscribe((message) => {
+        console.log(message);
+        this.notifyService.show(message);
+      });
+    });
   }
 }

@@ -1,0 +1,23 @@
+<h1>Notifications settings</h1>
+<div class="tabs">
+  <mat-tab-group animationDuration="300ms" >
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">person</mat-icon>
+        Personal settings
+      </ng-template>
+      <div class="tab-container">
+        <app-personal-settings></app-personal-settings>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">public</mat-icon>
+        Global settings
+      </ng-template>
+      <div class="tab-container">
+        <app-global-settings [disabled]="!isAccessibleFor(Access.SystemAdministrators)"></app-global-settings>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

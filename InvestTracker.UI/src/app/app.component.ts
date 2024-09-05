@@ -11,28 +11,13 @@ import {NotifyService} from "./shared/services/notify.service";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   protected title = 'InvestTracker.UI';
   protected isNavBarOpened: boolean;
   protected themeService = inject(ThemeService);
   private navStateService = inject(NavStateService);
-  private signalrService = inject(SignalrService);
-  private authenticationService = inject(AuthenticationService);
-  private notifyService = inject(NotifyService);
 
   constructor() {
     this.isNavBarOpened = this.navStateService.navStateSignal() === NavState.Opened;
-  }
-
-  ngOnInit(): void {
-    if (this.authenticationService.hasValidToken()) {
-      this.signalrService.buildConnection();
-      this.signalrService.startConnection().subscribe(() => {
-        this.signalrService.receiveMessage().subscribe((message) => {
-          console.log(message);
-          this.notifyService.show(message);
-        });
-      });
-    }
   }
 }

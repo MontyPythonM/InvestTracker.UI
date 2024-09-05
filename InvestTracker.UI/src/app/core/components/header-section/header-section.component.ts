@@ -7,6 +7,7 @@ import { NavStateService } from '../../services/nav-state.service';
 import { BaseComponent } from '../../../shared/abstractions/base.component';
 import { Access } from '../../enums/access.enum';
 import { Router } from '@angular/router';
+import {SignalrService} from "../../services/signalr.service";
 
 @Component({
   selector: 'app-header-section',
@@ -23,6 +24,7 @@ export class HeaderSectionComponent extends BaseComponent {
   githubLink: string = GITHUB_LINK;
   sections: SectionModel[];
   isDarkTheme: boolean;
+  private signalRService = inject(SignalrService);
 
   constructor() {
     super();
@@ -49,8 +51,9 @@ export class HeaderSectionComponent extends BaseComponent {
         console.log("Cannot revoke refresh token");
       }
     });
+    this.signalRService.stopConnection().safeSubscribe(this, {});
     this.authenticationService.clearToken();
     this.notifyService.show("Successfully logged out");
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl!('/home');
   }
 }

@@ -1,0 +1,39 @@
+<div *ngIf="personalSettings">
+  <div>
+    <div class="toggle">
+      <mat-slide-toggle [checked]="personalSettings.enableNotifications" (change)="settingChanged($event)"></mat-slide-toggle>
+      <span class="label">Enable notifications</span>
+    </div>
+    <div class="toggle">
+      <mat-slide-toggle [checked]="personalSettings.enableEmails" (change)="settingChanged($event)"></mat-slide-toggle>
+      <span class="label">Enable emails</span>
+    </div>
+    <div class="toggle">
+      <mat-slide-toggle [checked]="personalSettings.investmentStrategiesActivity" (change)="settingChanged($event)"></mat-slide-toggle>
+      <span class="label">Investment strategies activity</span>
+    </div>
+    <div class="toggle">
+      <mat-slide-toggle [checked]="personalSettings.portfoliosActivity" (change)="settingChanged($event)"></mat-slide-toggle>
+      <span class="label">Portfolios activity</span>
+    </div>
+    <div class="toggle">
+      <mat-slide-toggle [checked]="personalSettings.assetActivity" (change)="settingChanged($event)"></mat-slide-toggle>
+      <span class="label">Asset activity</span>
+    </div>
+    <div class="toggle">
+      <mat-slide-toggle [checked]="personalSettings.existingCollaborationsActivity" (change)="settingChanged($event)"></mat-slide-toggle>
+      <span class="label">Existing collaborations activity</span>
+    </div>
+    <div class="toggle">
+      <mat-slide-toggle [checked]="personalSettings.newCollaborationsActivity" (change)="settingChanged($event)"></mat-slide-toggle>
+      <span class="label">New collaborations activity</span>
+    </div>
+    <div *ngIf="isAccessibleFor(Access.Administrators)" class="toggle">
+      <mat-slide-toggle [checked]="personalSettings.administratorsActivity" (change)="settingChanged($event)"></mat-slide-toggle>
+      <span class="label">Administrators activity</span>
+    </div>
+  </div>
+  <button class="button" mat-raised-button (click)="saveSettings()" color="primary">Save</button>
+</div>
+
+

@@ -41,6 +41,22 @@ export class SignalrService {
     });
   }
 
+  stopConnection(): Observable<void> {
+    console.log('SignalR connection stopping...');
+    return new Observable<void>((observer) => {
+      this.hubConnection!
+        .stop()
+        .then(() => {
+          console.log('SignalR connection closed');
+          observer.next();
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
   receiveMessage(): Observable<string> {
     return new Observable<string>((observer) => {
       this.hubConnection!.on('notify', (message: string) => {

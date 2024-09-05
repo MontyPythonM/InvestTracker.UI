@@ -5,7 +5,6 @@
         class="nav-link"
         [routerLink]="section.path"
         [ngClass]="{ 'active': isSectionActive(section.path) }">
-        <div *ngIf=""></div>
       <mat-icon>{{ getIcon(section.name) }}</mat-icon>
       <span>{{ section.name }}</span>
     </a>
