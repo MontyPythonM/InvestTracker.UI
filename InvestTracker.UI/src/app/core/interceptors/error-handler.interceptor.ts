@@ -21,8 +21,8 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
   private handleHttpError(error: HttpErrorResponse) {
     try {
-      let errors = error.error as ErrorResponse;
-      this.notifyService.showError(errors.errors[0].exceptionMessage);
+      let problem = error.error as ErrorResponse;
+      this.notifyService.showError(problem.detail);
     }
     catch {
       if (error.status === 401) {

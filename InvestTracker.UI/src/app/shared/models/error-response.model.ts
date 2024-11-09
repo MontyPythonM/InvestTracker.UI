@@ -1,3 +1,7 @@
 export interface ErrorResponse {
-  errors: { exceptionCode: string; exceptionMessage: string; }[];
+  title: string;
+  detail: string;
+  instance: string;
+  type: string,
+  status: number;
 }

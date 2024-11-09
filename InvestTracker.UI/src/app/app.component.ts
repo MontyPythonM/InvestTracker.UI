@@ -1,10 +1,7 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ThemeService} from './core/services/theme.service';
 import {NavStateService} from './core/services/nav-state.service';
 import {NavState} from './core/enums/nav-state.enum';
-import {SignalrService} from "./core/services/signalr.service";
-import {AuthenticationService} from "./core/services/authentication.service";
-import {NotifyService} from "./shared/services/notify.service";
 
 @Component({
   selector: 'app-root',
