@@ -19,6 +19,9 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToDetails(row.id)"></mat-row>
     </mat-table>
     <app-paginator [pagedResponse]="pagedResponse" (pageChanged)="onPageChanged($event)"></app-paginator>
+
+    <app-data-grid></app-data-grid>
+
   </div>
 </div>
 <app-spinner [isVisible]="pagedResponse === undefined"></app-spinner>
