@@ -10,6 +10,6 @@ export class PagedRequest {
   }
 
   static Default = () : PagedRequest => {
-    return new PagedRequest(1, ResultsPerPage.Ten);
+    return new PagedRequest(1, ResultsPerPage.Twenty);
   }
 }
