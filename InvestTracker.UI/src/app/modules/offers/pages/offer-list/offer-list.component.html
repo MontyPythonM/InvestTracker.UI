@@ -20,7 +20,13 @@
     </mat-table>
     <app-paginator [pagedResponse]="pagedResponse" (pageChanged)="onPageChanged($event)"></app-paginator>
 
-    <app-data-grid></app-data-grid>
+    <app-data-grid
+      title="Offers"
+      [data]="pagedResponse"
+      [columns]="columns"
+      [onPageChanged]="onPageChanged"
+      [showAddButton]="canAddOffer">
+    </app-data-grid>
 
   </div>
 </div>

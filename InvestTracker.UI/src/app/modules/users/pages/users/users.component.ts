@@ -5,7 +5,7 @@ import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import { TableColumn } from '../../../../shared/models/table-column.interface';
 import { DateTimeService } from '../../../../shared/services/date-time.service';
-import { PagedRequest } from '../../../../core/models/paged-request.mode';
+import { PagedRequest } from '../../../../core/models/paged-request.model';
 import { PagedResponse } from '../../../../core/models/paged-response.model';
 
 @Component({

@@ -1,1 +1,37 @@
-<dx-button text="Test" icon="save" (click)="addAction()"></dx-button>
+<div class="container">
+  <h1 *ngIf="title" class="title">{{ title }}</h1>
+
+  <dx-button
+    *ngIf="showAddButton"
+    class="button"
+    [text]="addButtonAction!.text"
+    [icon]="addButtonAction!.icon"
+    stylingMode="contained"
+    type="success"
+    (click)="addButtonAction!.action()">
+  </dx-button>
+
+  <div class="table">
+    <dx-data-grid
+      id="dataGrid"
+      keyExpr="id"
+      [dataSource]="data?.items!"
+      [showBorders]="true"
+      [hoverStateEnabled]="true"
+      (onRowClick)="navigateToDetails($event.data.id)">
+
+      <dxo-paging [enabled]="false"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="false"></dxo-pager>
+
+      <dxi-column
+        *ngFor="let column of columns"
+        [dataField]="column.columnDef"
+        [caption]="column.header"
+        alignment="center">
+      </dxi-column>
+    </dx-data-grid>
+
+    <app-paginator [pagedResponse]="data" (pageChanged)="onPageChanged($event)"></app-paginator>
+  </div>
+</div>
+

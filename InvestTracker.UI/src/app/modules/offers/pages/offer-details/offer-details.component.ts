@@ -14,11 +14,11 @@ import {EditOfferComponent} from "../../components/edit-offer/edit-offer.compone
 import {ConfirmationDialogData} from "../../../../shared/models/confirmation-dialog-data.model";
 
 @Component({
-  selector: 'app-offer',
-  templateUrl: './offer.component.html',
-  styleUrl: './offer.component.scss'
+  selector: 'offer-details-details',
+  templateUrl: './offer-details.component.html',
+  styleUrl: './offer-details.component.scss'
 })
-export class OfferComponent extends BaseComponent implements OnInit {
+export class OfferDetailsComponent extends BaseComponent implements OnInit {
   private offersService = inject(OffersService);
   private route = inject(ActivatedRoute);
   private dateTimeService = inject(DateTimeService);
@@ -56,7 +56,7 @@ export class OfferComponent extends BaseComponent implements OnInit {
   }
 
   openDeleteOfferDialog() {
-    const data = new ConfirmationDialogData("Delete offer", "Are you sure you want to delete this offer?");
+    const data = new ConfirmationDialogData("Delete offer-details", "Are you sure you want to delete this offer-details?");
     const dialog = this.dialog.open(ConfirmationDialogComponent, { data });
     dialog.afterClosed().subscribe(result => {
       if (result) {

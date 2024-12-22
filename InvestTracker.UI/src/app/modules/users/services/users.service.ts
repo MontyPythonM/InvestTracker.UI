@@ -6,7 +6,7 @@ import { UserDetails } from '../models/user-details.model';
 import { SystemRole } from '../../../core/enums/system-role.enum';
 import { SystemSubscription } from '../../../core/enums/system-subscription.enum';
 import { HttpService } from '../../../shared/services/http.service';
-import { PagedRequest } from '../../../core/models/paged-request.mode';
+import { PagedRequest } from '../../../core/models/paged-request.model';
 import { PagedResponse } from '../../../core/models/paged-response.model';
 
 @Injectable({

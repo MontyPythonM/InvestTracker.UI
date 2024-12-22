@@ -1,23 +1,23 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { OffersService } from '../../services/offers.service';
-import { TableColumn } from '../../../../shared/models/table-column.interface';
-import { Offer } from '../../models/offer.model';
-import { PagedResponse } from '../../../../core/models/paged-response.model';
-import { BaseComponent } from '../../../../shared/abstractions/base.component';
-import { PagedRequest } from '../../../../core/models/paged-request.mode';
-import { Access } from '../../../../core/enums/access.enum';
-import { MatDialog } from '@angular/material/dialog';
-import { AddOfferComponent } from '../../components/add-offer/add-offer.component';
-import { of, switchMap } from 'rxjs';
-import { CreateOffer } from '../../models/create-offer.model';
+import {Component, inject, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {OffersService} from '../../services/offers.service';
+import {TableColumn} from '../../../../shared/models/table-column.interface';
+import {Offer} from '../../models/offer.model';
+import {PagedResponse} from '../../../../core/models/paged-response.model';
+import {BaseComponent} from '../../../../shared/abstractions/base.component';
+import {PagedRequest} from '../../../../core/models/paged-request.model';
+import {Access} from '../../../../core/enums/access.enum';
+import {MatDialog} from '@angular/material/dialog';
+import {AddOfferComponent} from '../../components/add-offer/add-offer.component';
+import {of, switchMap} from 'rxjs';
+import {CreateOffer} from '../../models/create-offer.model';
 
 @Component({
-  selector: 'app-offers',
-  templateUrl: './offers.component.html',
-  styleUrl: './offers.component.scss'
+  selector: 'offer-list',
+  templateUrl: './offer-list.component.html',
+  styleUrl: './offer-list.component.scss'
 })
-export class OffersComponent extends BaseComponent implements OnInit {
+export class OfferListComponent extends BaseComponent implements OnInit {
   private usersService = inject(OffersService);
   private router = inject(Router);
   private dialog = inject(MatDialog);
@@ -26,7 +26,7 @@ export class OffersComponent extends BaseComponent implements OnInit {
   columns: TableColumn<Offer>[];
   displayedColumns: string[];
   canAddOffer: boolean = false;
-  private pagedRequest: PagedRequest;
+  pagedRequest: PagedRequest;
 
   constructor() {
     super();
@@ -46,7 +46,7 @@ export class OffersComponent extends BaseComponent implements OnInit {
   }
 
   navigateToDetails(id: string) {
-    this.router.navigate(['/offers', id]);
+    this.router.navigate!(['/offers', id]);
   }
 
   onPageChanged(event: any) {

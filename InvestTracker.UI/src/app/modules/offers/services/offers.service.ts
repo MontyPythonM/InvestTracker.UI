@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpService } from '../../../shared/services/http.service';
-import { PagedRequest } from '../../../core/models/paged-request.mode';
+import { PagedRequest } from '../../../core/models/paged-request.model';
 import { Observable } from 'rxjs';
 import { PagedResponse } from '../../../core/models/paged-response.model';
 import { OfferDetails } from '../models/offer-details.model';
@@ -19,8 +19,8 @@ export class OffersService {
     return this.httpService.get<OfferDetails>(`${apiUrl.module.offers}/offers/${id}`);
   }
 
-  getOffers(reqeust: PagedRequest) : Observable<PagedResponse<Offer>> {
-    return this.httpService.get<PagedResponse<Offer>>(`${apiUrl.module.offers}/offers?page=${reqeust.page}&results=${reqeust.results}`);
+  getOffers(request: PagedRequest) : Observable<PagedResponse<Offer>> {
+    return this.httpService.get<PagedResponse<Offer>>(`${apiUrl.module.offers}/offers?page=${request.page}&results=${request.results}`);
   }
 
   createOffer(model: CreateOffer) : Observable<void> {

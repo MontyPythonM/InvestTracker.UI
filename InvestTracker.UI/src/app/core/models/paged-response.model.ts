@@ -1,4 +1,6 @@
-export class PagedResponse<T> {
+import {IBaseResponse} from "./base-response.model";
+
+export class PagedResponse<T extends IBaseResponse> {
   items: T[]
   currentPage: number;
   resultsPerPage: number;

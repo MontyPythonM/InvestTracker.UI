@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PagedRequest } from '../../../core/models/paged-request.mode';
+import { PagedRequest } from '../../../core/models/paged-request.model';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { resultsPerPage } from '../../../core/enums/results-per-page.enum';
 import { PagedResponse } from '../../../core/models/paged-response.model';
+import {IBaseResponse} from "../../../core/models/base-response.model";
 
 @Component({
   selector: 'app-paginator',
@@ -30,7 +31,7 @@ import { PagedResponse } from '../../../core/models/paged-response.model';
     { provide: MatPaginatorIntl, useClass: this }
   ]
 })
-export class PaginatorComponent<T> extends MatPaginatorIntl {
+export class PaginatorComponent<T extends IBaseResponse> extends MatPaginatorIntl {
   @Input() initialRequest?: PagedRequest = PagedRequest.Default();
   @Input() pagedResponse?: PagedResponse<T>;
   @Input() isDisabled?: boolean = false;

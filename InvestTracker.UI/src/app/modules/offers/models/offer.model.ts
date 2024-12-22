@@ -1,4 +1,6 @@
-export class Offer {
+import {IBaseResponse} from "../../../core/models/base-response.model";
+
+export class Offer implements IBaseResponse {
   id: string;
   title: string;
   description: string;

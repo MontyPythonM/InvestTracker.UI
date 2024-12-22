@@ -21,8 +21,13 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
   private handleHttpError(error: HttpErrorResponse) {
     try {
-      let problem = error.error as ErrorResponse;
-      this.notifyService.showError(problem.detail);
+      if (error.status === 0) {
+        this.notifyService.showError('Server is not responding');
+      }
+      else {
+        let problem = error.error as ErrorResponse;
+        this.notifyService.showError(problem.detail);
+      }
     }
     catch {
       if (error.status === 401) {
@@ -33,9 +38,6 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
       }
       else if (error.status === 500) {
         this.notifyService.showError('Internal server error');
-      }
-      else if (error.status === 0) {
-        this.notifyService.showError('Server is not responding');
       }
       else {
         this.notifyService.showError('An undefined error has occurred');
