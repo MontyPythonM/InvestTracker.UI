@@ -11,7 +11,7 @@ export class ThemeService {
   constructor() {
     const savedTheme = localStorage.getItem(THEME_KEY);
     if (savedTheme) {
-      this.themeSignal.set(savedTheme as Theme);
+      this.themeSignal.set(savedTheme);
     } else {
       localStorage.setItem(THEME_KEY, Theme.Dark);
     }

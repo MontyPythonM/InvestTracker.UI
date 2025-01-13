@@ -1,13 +1,11 @@
-import {Component, inject, OnDestroy} from '@angular/core';
+import {Component, Directive, inject, OnDestroy} from '@angular/core';
 import {Subject} from 'rxjs';
 import {AuthenticationService} from '../../core/services/authentication.service';
 import {Access} from '../../core/enums/access.enum';
 import {AccessService} from '../../core/services/access.service';
 import {NotifyService} from '../services/notify.service';
 
-@Component({
-  template: '',
-})
+@Directive()
 export abstract class BaseComponent implements OnDestroy {
   public destroy$: Subject<void> = new Subject<void>();
   protected authenticationService = inject(AuthenticationService);

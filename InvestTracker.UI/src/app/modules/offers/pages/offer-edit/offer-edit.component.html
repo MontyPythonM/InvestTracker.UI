@@ -1,5 +1,5 @@
-<app-form-container title="Add offer" [disableSaveButton]="!this.form.valid" (save)="save()" (close)="close()">
-  <form class="form" [formGroup]="form">
+<app-form-container *ngIf="data" title="Edit offer" [disableSaveButton]="!this.form?.valid" (save)="save()" (close)="close()">
+  <form class="form" [formGroup]="form!">
     <mat-form-field class="field">
       <input matInput formControlName="title">
       <mat-label>Title</mat-label>

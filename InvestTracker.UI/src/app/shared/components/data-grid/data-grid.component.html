@@ -11,7 +11,11 @@
     (click)="addButtonAction!.action()">
   </dx-button>
 
-  <div class="table">
+  <div *ngIf="data?.totalResults === 0" class="info">
+    <h2>No records found</h2>
+  </div>
+
+  <div *ngIf="data?.totalResults !== 0" class="table">
     <dx-data-grid
       id="dataGrid"
       keyExpr="id"

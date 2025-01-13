@@ -23,7 +23,7 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { DatePipe } from '@angular/common';
 import { ErrorHandlerInterceptor } from './core/interceptors/error-handler.interceptor';
 import { UpdateAdvisorComponent } from './core/components/update-advisor/update-advisor.component';
-import { DialogContainerModule } from './shared/components/dialog-container/dialog-container.module';
+import { FormContainerModule } from './shared/components/form-container/form-container.module';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,7 @@ import { DialogContainerModule } from './shared/components/dialog-container/dial
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DialogContainerModule
+    FormContainerModule
   ],
   providers: [
     DatePipe,

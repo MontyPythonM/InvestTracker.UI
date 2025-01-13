@@ -13,8 +13,4 @@ export class DataGridAction {
     this.text = text;
     this.type = type;
   }
-
-  static Default = (action: Function) : DataGridAction => {
-    return new DataGridAction(action, 'add', 'Add', 'success');
-  }
 }

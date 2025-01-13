@@ -7,22 +7,20 @@ import {PaginatorModule} from '../../shared/components/paginator/paginator.modul
 import {SpinnerModule} from '../../shared/components/spinner/spinner.module';
 import {MaterialModule} from '../../shared/modules/material.module';
 import {PropertyGridModule} from '../../shared/components/property-grid/property-grid.module';
-import {AddOfferComponent} from './components/add-offer/add-offer.component';
-import {DialogContainerModule} from '../../shared/components/dialog-container/dialog-container.module';
+import {FormContainerModule} from '../../shared/components/form-container/form-container.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
-import {EditOfferComponent} from './components/edit-offer/edit-offer.component';
 import {ConfirmationDialogModule} from '../../shared/components/confirmation-dialog/confirmation-dialog.module';
 import {DataGridModule} from "../../shared/components/data-grid/data-grid.module";
-import { OfferAddComponent } from './pages/offer-add/offer-add.component';
+import {OfferAddComponent} from './pages/offer-add/offer-add.component';
+import {OfferEditComponent} from './pages/offer-edit/offer-edit.component';
 
 @NgModule({
   declarations: [
     OfferListComponent,
     OfferDetailsComponent,
-    AddOfferComponent,
-    EditOfferComponent,
-    OfferAddComponent
+    OfferAddComponent,
+    OfferEditComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +28,7 @@ import { OfferAddComponent } from './pages/offer-add/offer-add.component';
     SpinnerModule,
     MaterialModule,
     PropertyGridModule,
-    DialogContainerModule,
+    FormContainerModule,
     ReactiveFormsModule,
     MatChipsModule,
     ConfirmationDialogModule,
@@ -47,6 +45,10 @@ import { OfferAddComponent } from './pages/offer-add/offer-add.component';
       {
         path: 'add',
         component: OfferAddComponent
+      },
+      {
+        path: ':id/edit',
+        component: OfferEditComponent
       }
     ])
   ]

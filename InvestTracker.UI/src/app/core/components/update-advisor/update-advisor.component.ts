@@ -8,7 +8,7 @@ import { PHONE_REGEX } from '../../constants';
 @Component({
   selector: 'app-update-advisor',
   template: `
-    <app-dialog-container title="Update advisor profile" [disableSaveButton]="!this.form.valid" (save)="save()" (close)="close()">
+    <app-form-container title="Update advisor profile" [disableSaveButton]="!this.form.valid" (save)="save()" (close)="close()">
       <form class="form" [formGroup]="form">
         <mat-form-field class="field">
           <input matInput formControlName="phoneNumber">
@@ -30,7 +30,7 @@ import { PHONE_REGEX } from '../../constants';
         </mat-form-field>
       </form>
       <img *ngIf="data.model.avatar" class="avatar" [src]="'data:image/jpeg;base64,'+ data.model.avatar"/>
-    </app-dialog-container>
+    </app-form-container>
   `,
   styles: [`
     .field {

@@ -20,4 +20,8 @@ export class NotifyService {
   showError(message: string) {
     this.show(message, 'Ok', 4000, 'right', 'bottom', ['error-snackbar']);
   }
+
+  showSuccess(message: string) {
+    this.show(message, 'Ok', 4000, 'right', 'bottom', ['success-snackbar']);
+  }
 }

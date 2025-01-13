@@ -1,18 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UsersComponent } from './pages/users/users.component';
-import { RouterModule } from '@angular/router';
-import { UserDetailsComponent } from './pages/user-details/user-details.component';
-import { AccessGuardService } from '../../core/services/access-guard.service';
-import { Access } from '../../core/enums/access.enum';
-import { SpinnerModule } from "../../shared/components/spinner/spinner.module";
-import { MaterialModule } from '../../shared/modules/material.module';
-import { PropertyGridModule } from '../../shared/components/property-grid/property-grid.module';
-import { SetSubscriptionComponent } from './components/set-subscription/set-subscription.component';
-import { SetRoleComponent } from './components/set-role/set-role.component';
-import { DialogContainerModule } from '../../shared/components/dialog-container/dialog-container.module';
-import { FormsModule } from '@angular/forms';
-import { PaginatorModule } from '../../shared/components/paginator/paginator.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {UsersComponent} from './pages/users/users.component';
+import {RouterModule} from '@angular/router';
+import {UserDetailsComponent} from './pages/user-details/user-details.component';
+import {AccessGuardService} from '../../core/services/access-guard.service';
+import {Access} from '../../core/enums/access.enum';
+import {SpinnerModule} from "../../shared/components/spinner/spinner.module";
+import {MaterialModule} from '../../shared/modules/material.module';
+import {PropertyGridModule} from '../../shared/components/property-grid/property-grid.module';
+import {SetSubscriptionComponent} from './components/set-subscription/set-subscription.component';
+import {SetRoleComponent} from './components/set-role/set-role.component';
+import {FormsModule} from '@angular/forms';
+import {PaginatorModule} from '../../shared/components/paginator/paginator.module';
+import {DialogContainerModule} from "../../shared/components/dialog-container/dialog-container.module";
 
 @NgModule({
     declarations: [

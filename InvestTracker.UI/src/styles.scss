@@ -7,3 +7,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --mdc-snackbar-container-color: darkred !important;
   --mdc-snackbar-supporting-text-color: white !important;
 }
+
+.success-snackbar {
+  --mdc-snackbar-container-color: #226222 !important;
+  --mdc-snackbar-supporting-text-color: #ffffff !important;
+}
