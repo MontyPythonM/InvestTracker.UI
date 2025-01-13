@@ -29,7 +29,7 @@ import { PHONE_REGEX } from '../../constants';
           <mat-label>Avatar</mat-label>
         </mat-form-field>
       </form>
-      <img *ngIf="data.model.avatar" class="avatar" [src]="'data:image/jpeg;base64,'+ data.model.avatar"/>
+      <img *ngIf="data.model.avatar" class="avatar" [src]="'data:image/jpeg;base64,'+ data.model.avatar" alt="avatar"/>
     </app-form-container>
   `,
   styles: [`
@@ -41,7 +41,6 @@ import { PHONE_REGEX } from '../../constants';
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: top;
     }
     .avatar {
       max-width: 200px;

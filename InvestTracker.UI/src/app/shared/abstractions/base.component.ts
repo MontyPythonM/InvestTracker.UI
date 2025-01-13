@@ -1,4 +1,4 @@
-import {Component, Directive, inject, OnDestroy} from '@angular/core';
+import {Directive, inject, OnDestroy} from '@angular/core';
 import {Subject} from 'rxjs';
 import {AuthenticationService} from '../../core/services/authentication.service';
 import {Access} from '../../core/enums/access.enum';

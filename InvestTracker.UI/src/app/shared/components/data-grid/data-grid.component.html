@@ -1,15 +1,10 @@
 <div class="container">
   <h1 *ngIf="title" class="title">{{ title }}</h1>
 
-  <dx-button
-    *ngIf="showAddButton"
-    class="button"
-    [text]="addButtonAction!.text"
-    [icon]="addButtonAction!.icon"
-    stylingMode="contained"
-    type="success"
-    (click)="addButtonAction!.action()">
-  </dx-button>
+  <button mat-raised-button *ngIf="showAddButton" class="button" color="primary" (click)="addButtonAction!.action()">
+    <mat-icon>add</mat-icon>
+    <span>Add</span>
+  </button>
 
   <div *ngIf="data?.totalResults === 0" class="info">
     <h2>No records found</h2>

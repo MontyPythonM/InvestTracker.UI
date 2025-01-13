@@ -43,6 +43,7 @@ export class DataGridComponent<T extends IBaseResponse> implements OnInit {
   }
 
   private defaultAddAction = () => {
+    console.log("dupa")
     this.router.navigate!(['add'], { relativeTo: this.activatedRoute });
   }
 }

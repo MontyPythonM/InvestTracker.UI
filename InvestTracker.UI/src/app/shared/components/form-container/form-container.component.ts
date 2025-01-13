@@ -12,7 +12,6 @@ import {ActivatedRoute, Router} from "@angular/router";
         <div class="buttons">
           <button mat-raised-button class="close-button" (click)="cancel()" color="secondary">Cancel</button>
           <button mat-raised-button class="submit-button" (click)="save.emit()" color="primary" [disabled]="disableSaveButton">Save</button>
-
         </div>
     </div>
   `,
